@@ -1,0 +1,33 @@
+.jumbotron
+  h1 Keep your logbook safe.
+  p
+    | LogTenSafe provides automatic, regular backups of your LogTen Pro logbook.
+    |  If iCloud unexpectedly corrupts your logbook, you can go back in time and
+    |  restore from a backup. Backing up is automatic and transparent.
+  p: a.btn.btn-primary.btn-lg href=new_user_url
+    | Get Started
+    = ' '
+    i.fa.fa-angle-double-right
+
+.row
+  .col-md-4
+  = form_tag login_url, class: 'col-md-4', id: 'login-form', role: 'form' do
+    h3 Already have an account?
+    input.form-control#login type="text" name="login" required="required" placeholder="login" value=params[:login]
+    input.form-control#password type="password" name="password" required="required" placeholder="password" value=params[:password]
+    input type="hidden" name="next" value=params[:next]
+    input.btn.btn-md.btn-default.btn-block type="submit" value="Log in"
+  .col-md-4
+
+sass:
+  #login-form
+    input[name="login"]
+      // get rid of double line
+      margin-bottom: -1px
+      border-bottom-left-radius: 0
+      border-bottom-right-radius: 0
+
+    input[name="password"]
+      margin-bottom: 10px
+      border-top-left-radius: 0
+      border-top-right-radius: 0

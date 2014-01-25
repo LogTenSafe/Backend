@@ -1,0 +1,36 @@
+h1 Get started by signing up below.
+
+.row
+  .col-md-4
+  = form_for(@user, html: {role: 'form', class: 'form-horizontal col-md-4'}) do |f|
+    .form-group= f.text_field :login, required: true, class: 'form-control', placeholder: "desired login"
+    .form-group= f.password_field :password, required: true, class: 'form-control', placeholder: "desired password"
+    .form-group= f.password_field :password_confirmation, required: true, class: 'form-control', placeholder: "again"
+    .form-group= f.submit class: 'btn btn-lg btn-default btn-block'
+    p= link_to "I already have an account.", login_url
+  .col-md-4
+
+sass:
+  .form-group
+    margin: 0
+    padding: 0
+
+  #new_user
+    margin-top: 20px
+
+    input[type="submit"]
+      margin-bottom: 10px
+
+  #user_login, #user_password
+    // get rid of double line
+    margin-bottom: -1px
+    border-bottom-left-radius: 0
+    border-bottom-right-radius: 0
+
+  #user_password
+    border-radius: 0
+
+  #user_password_confirmation
+    margin-bottom: 10px
+    border-top-left-radius: 0
+    border-top-right-radius: 0

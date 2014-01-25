@@ -1,0 +1,6 @@
+---
+storage: :s3
+s3_credentials:
+  bucket: logtensafe
+s3_headers:
+  Expires: "Sun, 31 Jul 2026 07:16:10 GMT"

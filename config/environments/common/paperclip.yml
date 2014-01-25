@@ -1,0 +1,5 @@
+---
+storage: :filesystem
+path: ":rails_root/public/system/:rails_env/:class/:id_partition/:attachment/LogTenCoreDataStore.:extension"
+url: "/system/:rails_env/:class/:id_partition/:attachment/LogTenCoreDataStore.:extension"
+use_timestamp: false
