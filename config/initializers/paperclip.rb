@@ -2,7 +2,7 @@
 
 Paperclip::Attachment.default_options.update LogTenSafe::Configuration.paperclip.symbolize_keys
 Paperclip::Attachment.default_options[:s3_credentials] =
-  Paperclip::Attachment.default_options[:s3_credentials].symbolize_keys.merge LogTenSafe::Configuration.secrets.s3.symbolize_keys
+  (Paperclip::Attachment.default_options[:s3_credentials] || {}).symbolize_keys.merge LogTenSafe::Configuration.secrets.s3.symbolize_keys
 
 class Paperclip::Attachment
   # Returns the pending file, if one hasn't been assigned yet
