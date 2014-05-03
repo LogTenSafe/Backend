@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # FRAMEWORK
-gem 'rails', '4.0.3'
+gem 'rails', '4.1.0'
 gem 'configoro'
 
 # MODELS
@@ -35,6 +35,9 @@ group :development do
   gem 'capistrano-rvm'
   gem 'capistrano-bundler'
   gem 'capistrano-rails'
+
+  # DEVELOPMENT
+  gem 'spring'
 end
 
 group :doc do

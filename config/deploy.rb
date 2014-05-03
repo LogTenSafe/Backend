@@ -1,5 +1,5 @@
-# config valid only for Capistrano 3.1
-lock '3.1.0'
+# config valid only for Capistrano 3.2
+lock '3.2.1'
 
 set :application, 'LogTenSafe'
 set :repo_url, 'git://github.com/LogTenSafe/website.git'
@@ -17,5 +17,6 @@ namespace :deploy do
     end
   end
 
+  after :finishing, 'deploy:restart'
   after :finishing, 'deploy:cleanup'
 end

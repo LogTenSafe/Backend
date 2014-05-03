@@ -1,4 +1,4 @@
-LogTenSafe::Application.routes.draw do
+Rails.application.routes.draw do
   resource :account, controller: 'account', only: [:edit, :update, :destroy]
   resources :users, only: [:new, :create]
   resources :backups, only: [:index, :show, :create, :destroy]
