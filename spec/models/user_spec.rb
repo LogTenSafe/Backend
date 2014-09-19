@@ -1,11 +1,11 @@
-require 'spec_helper'
+require 'rails_helper'
 
-describe User do
+RSpec.describe User, type: :model do
   describe '#authentic?' do
     subject { FactoryGirl.create(:user, password: 'example password') }
 
-    it { should be_authentic('example password') }
-    it { should_not be_authentic('another password') }
+    it { is_expected.to be_authentic('example password') }
+    it { is_expected.not_to be_authentic('another password') }
   end
 
   describe '.authenticate' do
@@ -16,21 +16,21 @@ describe User do
       let(:login) { user.login }
       let(:password) { 'some password' }
 
-      it { should eql(user) }
+      it { is_expected.to eql(user) }
     end
 
     context "with incorrect credentials" do
       let(:login) { user.login }
       let(:password) { 'another password' }
 
-      it { should be_nil }
+      it { is_expected.to be_nil }
     end
 
     context "with an unknown login" do
       let(:login) { 'not-found' }
       let(:password) { 'some password' }
 
-      it { should be_nil }
+      it { is_expected.to be_nil }
     end
   end
 
@@ -50,7 +50,7 @@ describe User do
     context "not given to a newly-created user" do
       subject { FactoryGirl.build(:user, password: nil) }
 
-      it { should_not be_valid }
+      it { is_expected.not_to be_valid }
     end
 
     context "existing user" do
@@ -59,17 +59,17 @@ describe User do
 
       context "login changed only" do
         let(:attrs) { { login: 'another' } }
-        it { should be_valid }
+        it { is_expected.to be_valid }
       end
 
       context "login and password changed without confirmation" do
         let(:attrs) { { login: 'another2', password: 'another' } }
-        it { should be_valid }
+        it { is_expected.to be_valid }
       end
 
       context "login and password changed with confirmation" do
         let(:attrs) { { login: 'another3', password: 'another', password_confirmation: 'another' } }
-        it { should be_valid }
+        it { is_expected.to be_valid }
       end
     end
   end

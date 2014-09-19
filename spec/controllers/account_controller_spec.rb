@@ -1,6 +1,6 @@
-require 'spec_helper'
+require 'rails_helper'
 
-describe AccountController do
+RSpec.describe AccountController, type: :controller do
   before(:each) { login_as(@user = FactoryGirl.create(:user)) }
 
   describe '#destroy' do

@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # FRAMEWORK
-gem 'rails', '4.1.4'
+gem 'rails', '4.1.6'
 gem 'configoro'
 
 # MODELS
@@ -9,14 +9,13 @@ gem 'pg'
 gem 'paperclip'
 
 # ASSETS
-gem 'sass-rails', '>= 4.0.3'
+gem 'sass-rails', '5.0.0.beta1'
 gem 'less-rails'
 gem 'uglifier'
 gem 'coffee-rails'
 gem 'therubyracer', platforms: :ruby
 gem 'jquery-rails'
 gem 'turbolinks'
-gem 'compass-rails'
 gem 'font-awesome-rails'
 
 # VIEWS
@@ -47,7 +46,9 @@ end
 
 group :test do
   gem 'rspec-rails'
+  gem 'rspec-its', require: 'rspec/its'
   gem 'factory_girl_rails'
+  gem 'database_cleaner'
 end
 
 group :production do

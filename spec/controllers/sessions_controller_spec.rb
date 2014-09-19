@@ -1,6 +1,6 @@
-require 'spec_helper'
+require 'rails_helper'
 
-describe SessionsController do
+RSpec.describe SessionsController, type: :controller do
   describe '#create' do
     before(:all) { @user = FactoryGirl.create(:user, password: 'hello world') }
 

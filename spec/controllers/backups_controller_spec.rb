@@ -1,6 +1,6 @@
-require 'spec_helper'
+require 'rails_helper'
 
-describe BackupsController do
+RSpec.describe BackupsController, type: :controller do
   describe '#index' do
     before :all do
       @user    = FactoryGirl.create(:user)
