@@ -1,15 +1,16 @@
 source 'https://rubygems.org'
 
 # FRAMEWORK
-gem 'rails', '4.1.6'
+gem 'rails', '4.2.0'
 gem 'configoro'
+gem 'responders'
 
 # MODELS
 gem 'pg'
 gem 'paperclip'
 
 # ASSETS
-gem 'sass-rails', '5.0.0.beta1'
+gem 'sass-rails'
 gem 'less-rails'
 gem 'uglifier'
 gem 'coffee-rails'
@@ -37,6 +38,7 @@ group :development do
 
   # DEVELOPMENT
   gem 'spring'
+  gem 'web-console'
 end
 
 group :doc do

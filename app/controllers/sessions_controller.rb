@@ -1,8 +1,8 @@
 # Controller for signing users in and out.
 
 class SessionsController < ApplicationController
-  skip_before_filter :login_required
-  before_filter :must_be_unauthenticated, except: :destroy
+  skip_before_action :login_required
+  before_action :must_be_unauthenticated, except: :destroy
 
   # Displays a login page. Supply a `next` query parameter to redirect the user
   # to a specific page after login.

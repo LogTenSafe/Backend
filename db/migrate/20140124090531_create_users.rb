@@ -2,7 +2,7 @@ class CreateUsers < ActiveRecord::Migration
   def change
     create_table :users do |t|
       t.string :login, :crypted_password, :pepper, null: false, limit: 128
-      t.timestamps
+      t.timestamps null: false
     end
 
     change_table :users do |t|

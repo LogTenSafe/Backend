@@ -2,7 +2,7 @@
 # uploader software uses, and the controller end-users use to browse backups.
 
 class BackupsController < ApplicationController
-  before_filter :find_backup, except: [:index, :create]
+  before_action :find_backup, except: [:index, :create]
   skip_before_action :verify_authenticity_token, only: :create
 
   respond_to :html, :json, except: :show

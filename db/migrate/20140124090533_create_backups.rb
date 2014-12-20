@@ -14,7 +14,7 @@ class CreateBackups < ActiveRecord::Migration
 
       t.string :hostname, limit: 128
 
-      t.timestamps
+      t.timestamps null: false
     end
 
     change_table :backups do |t|

@@ -1,7 +1,7 @@
 # RESTful controller for {User} instances. Powers the signup page.
 
 class UsersController < ApplicationController
-  skip_before_filter :login_required
+  skip_before_action :login_required
   respond_to :html
 
   # Displays a signup page.

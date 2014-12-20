@@ -4,7 +4,7 @@
 
 class ApplicationController < ActionController::Base
   include Authentication
-  before_filter :login_required
+  before_action :login_required
 
   protect_from_forgery with: :exception
 
