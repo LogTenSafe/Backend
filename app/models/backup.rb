@@ -67,7 +67,7 @@ class Backup < ActiveRecord::Base
     # ruby-land, and sum them there, where the result is equal to the one logten
     # gives.
     times                 = db.execute('SELECT ZFLIGHT_TOTALTIME FROM ZFLIGHT').flatten
-    self.total_hours      = times.map { |t| (t/60.0).round(1) }.sum
+    self.total_hours      = times.compact.map { |t| (t/60.0).round(1) }.sum
 
     self.last_flight = {
       'origin'      => db.get_first_value('SELECT ZPLACE_FAAID FROM ZPLACE WHERE Z_PK = ?', last_flight['ZFLIGHT_FROMPLACE']),
