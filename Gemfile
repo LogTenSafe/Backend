@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # FRAMEWORK
-gem 'rails', '4.2.0'
+gem 'rails', '4.2.1'
 gem 'configoro'
 gem 'responders'
 
@@ -55,5 +55,5 @@ group :test do
 end
 
 group :production do
-  gem 'aws-sdk'
+  gem 'aws-sdk', '< 2.0' # aws-s3 incompatibility
 end

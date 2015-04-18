@@ -1,4 +1,4 @@
-lock '3.3.5'
+lock '3.4.0'
 
 set :application, 'logtensafe'
 set :repo_url, 'git://github.com/LogTenSafe/website.git'
