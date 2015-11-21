@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # FRAMEWORK
-gem 'rails', '4.2.4'
+gem 'rails', '4.2.5'
 gem 'configoro'
 gem 'responders'
 
