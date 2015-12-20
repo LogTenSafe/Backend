@@ -18,6 +18,7 @@ gem 'therubyracer', platforms: :ruby
 gem 'jquery-rails'
 gem 'turbolinks'
 gem 'font-awesome-rails'
+gem 'sprockets-rails', '< 3.0' # weird incompatibility with less-rails
 
 # VIEWS
 gem 'jbuilder'
