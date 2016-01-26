@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # FRAMEWORK
-gem 'rails', '4.2.5'
+gem 'rails', '4.2.5.1'
 gem 'configoro'
 gem 'responders'
 
@@ -18,7 +18,7 @@ gem 'therubyracer', platforms: :ruby
 gem 'jquery-rails'
 gem 'turbolinks'
 gem 'font-awesome-rails'
-gem 'sprockets-rails', '< 3.0' # weird incompatibility with less-rails
+gem 'sprockets-rails'
 
 # VIEWS
 gem 'jbuilder'
@@ -56,5 +56,5 @@ group :test do
 end
 
 group :production do
-  gem 'aws-sdk', '< 2.0' # aws-s3 incompatibility
+  gem 'aws-sdk', '< 2.0' # incompatible with Paperclip < 5
 end
