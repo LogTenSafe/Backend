@@ -23,14 +23,18 @@
       tr class=(backup.most_recent? ? 'active' : nil)
         td
           = l backup.created_at, format: :short
-          br
-          small Uploaded from #{backup.hostname}
+          - if backup.hostname?
+            br
+            small Uploaded from #{backup.hostname}
         td= number_with_delimiter backup.total_hours
         td
-          strong= l backup.last_flight_date, format: :short
-          |  (#{number_with_delimiter backup.last_flight['duration']} hr)
-          br
-          small #{backup.last_flight['origin']} &rarr; #{backup.last_flight['destination']}
+          - if backup.last_flight_date && backup.last_flight.present?
+            strong= l backup.last_flight_date, format: :short
+            |  (#{number_with_delimiter backup.last_flight['duration']} hr)
+            br
+            small #{backup.last_flight['origin']} &rarr; #{backup.last_flight['destination']}
+          - else
+            | No flights
         td
           = link_to "Download", backup_url(backup, format: 'gz')
           |  (#{number_to_human_size backup.logbook_file_size})

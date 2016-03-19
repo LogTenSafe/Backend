@@ -22,13 +22,13 @@ class Backup < ActiveRecord::Base
   validates :logbook,
             presence: true
   validates :logbook_file_size,
-            numericality: { less_than: 20.megabytes }
+            numericality: {less_than: 20.megabytes}
   validates :logbook_fingerprint,
             uniqueness: {scope: :user_id}
   validates :total_hours,
-            numericality: { greater_than_or_equal_to: 0, less_than: 1_000_000 }
+            numericality: {greater_than_or_equal_to: 0, less_than: 1_000_000}
   validates :hostname,
-            length:    { maximum: 128 },
+            length:    {maximum: 128},
             allow_nil: true
 
   do_not_validate_attachment_file_type :logbook
@@ -53,7 +53,11 @@ class Backup < ActiveRecord::Base
     db = SQLite3::Database.new(logbook_file)
 
     columns, last_flight = db.execute2('SELECT * FROM ZFLIGHT ORDER BY ZFLIGHT_FLIGHTDATE DESC LIMIT 1').first(2)
-    last_flight          = Hash[*columns.zip(last_flight).flatten]
+    unless last_flight
+      self.total_hours = 0
+      return
+    end
+    last_flight = Hash[*columns.zip(last_flight).flatten]
 
     self.last_flight_date = Time.utc(2001).advance(seconds: last_flight['ZFLIGHT_FLIGHTDATE']).utc.to_date
 
@@ -70,9 +74,9 @@ class Backup < ActiveRecord::Base
     self.total_hours      = times.compact.map { |t| (t/60.0).round(1) }.sum
 
     self.last_flight = {
-      'origin'      => db.get_first_value('SELECT ZPLACE_FAAID FROM ZPLACE WHERE Z_PK = ?', last_flight['ZFLIGHT_FROMPLACE']),
-      'destination' => db.get_first_value('SELECT ZPLACE_FAAID FROM ZPLACE WHERE Z_PK = ?', last_flight['ZFLIGHT_TOPLACE']),
-      'duration'    => (last_flight['ZFLIGHT_TOTALTIME']/60.0).round(1)
+        'origin'      => db.get_first_value('SELECT ZPLACE_FAAID FROM ZPLACE WHERE Z_PK = ?', last_flight['ZFLIGHT_FROMPLACE']),
+        'destination' => db.get_first_value('SELECT ZPLACE_FAAID FROM ZPLACE WHERE Z_PK = ?', last_flight['ZFLIGHT_TOPLACE']),
+        'duration'    => (last_flight['ZFLIGHT_TOTALTIME']/60.0).round(1)
     }
   end
 
