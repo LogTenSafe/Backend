@@ -1,10 +1,10 @@
-lock '3.4.0'
+lock '3.5.0'
 
 set :application, 'logtensafe'
 set :repo_url, 'git://github.com/LogTenSafe/website.git'
 
 set :deploy_to, '/var/www/www.logtensafe.com'
-set :rvm_ruby_version, "2.3.0@#{fetch :application}"
+set :rvm_ruby_version, "2.3.1@#{fetch :application}"
 
 set :linked_files, %w{config/environments/production/secrets.yml config/secrets.yml}
 set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
