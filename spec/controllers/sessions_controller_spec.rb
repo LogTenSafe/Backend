@@ -6,13 +6,13 @@ RSpec.describe SessionsController, type: :controller do
 
     context '[valid credentials]' do
       it "should log the user in and redirect to the next URL if given" do
-        post :create, login: @user.login, password: 'hello world', next: '/foo/bar'
+        post :create, params: {login: @user.login, password: 'hello world', next: '/foo/bar'}
         expect(response).to redirect_to('/foo/bar')
         expect(session[:user_id]).to eql(@user.id)
       end
 
       it "should log the user in and redirect to the home otherwise" do
-        post :create, login: @user.login, password: 'hello world'
+        post :create, params: {login: @user.login, password: 'hello world'}
         expect(response).to redirect_to('/')
         expect(session[:user_id]).to eql(@user.id)
       end
@@ -20,7 +20,7 @@ RSpec.describe SessionsController, type: :controller do
 
     context '[invalid credentials]' do
       it "should re-render the form and not log the user in" do
-        post :create, login: @user.login, password: 'bad'
+        post :create, params: {login: @user.login, password: 'bad'}
         expect(response).to render_template('new')
         expect(session[:user_id]).to be_nil
       end

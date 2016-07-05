@@ -14,11 +14,9 @@
 # | `total_hours`      | Sum of all flight entry durations in the logbook.                                                           |
 # | `hostname`         | The name of the computer that uploaded the logbook (provided by the uploader software).                     |
 
-class Backup < ActiveRecord::Base
+class Backup < ApplicationRecord
   belongs_to :user, inverse_of: :backups
 
-  validates :user,
-            presence: true
   validates :logbook,
             presence: true
   validates :logbook_file_size,

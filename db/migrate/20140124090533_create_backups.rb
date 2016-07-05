@@ -1,4 +1,4 @@
-class CreateBackups < ActiveRecord::Migration
+class CreateBackups < ActiveRecord::Migration[4.2]
   def change
     create_table :backups do |t|
       t.belongs_to :user, null: false

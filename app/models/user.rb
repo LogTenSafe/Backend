@@ -19,7 +19,7 @@ require 'digest/sha2'
 # | `crypted_password` | The user's password, sent through a one-way hash, salted and peppered. |
 # | `pepper`           | A hash salt unique to this User.                                       |
 
-class User < ActiveRecord::Base
+class User < ApplicationRecord
   has_many :backups, inverse_of: :user, dependent: :destroy
 
   # Virtual attribute used for changing passwords.

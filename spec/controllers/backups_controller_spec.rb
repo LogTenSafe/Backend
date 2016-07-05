@@ -22,7 +22,7 @@ RSpec.describe BackupsController, type: :controller do
     end
 
     it "should send a gzipped copy of the backup" do
-      get :show, id: @backup.to_param, format: 'gz'
+      get :show, params: {id: @backup.to_param, format: 'gz'}
       #expect(response.body.force_encoding('ASCII-8BIT')).
       #  to eql(Rails.root.join('spec', 'fixtures', 'LogTenCoreDataStore.sql.gz').binread)
       #TODO filename discrepancies make these files unequal
