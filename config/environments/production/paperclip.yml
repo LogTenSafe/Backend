@@ -4,3 +4,12 @@ s3_credentials:
   bucket: logtensafe
 s3_headers:
   Expires: "Sun, 31 Jul 2026 07:16:10 GMT"
+path: ":rails_env/:class/:id_partition/:attachment/LogTenCoreDataStore.:extension"
+use_timestamp: false
+s3_region: us-west-1
+s3_host_name: s3.amazonaws.com
+s3_protocol: :https
+s3_options:
+  force_path_style: true
+  endpoint: "https://s3.amazonaws.com"
+url: ":s3_path_url"
