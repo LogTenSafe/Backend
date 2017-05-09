@@ -1,15 +1,17 @@
-lock '3.6.1'
+# config valid only for current version of Capistrano
+lock '3.8.1'
 
 set :application, 'logtensafe'
 set :repo_url, 'git://github.com/LogTenSafe/website.git'
 
 set :deploy_to, '/var/www/www.logtensafe.com'
-set :rvm_ruby_version, "2.3.3@#{fetch :application}"
+set :rvm_ruby_version, "2.4.1@#{fetch :application}"
 
-set :linked_files, %w{config/environments/production/secrets.yml config/secrets.yml}
-set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
+append :linked_files, 'config/secrets.yml',
+       'config/environments/production/secrets.yml',
+       'config/sidekiq.yml', 'config/sidekiq_web_credentials.yml'
 
-namespace :deploy do
-  after :finishing, :restart
-  after :finishing, :cleanup
-end
+append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets',
+       'public/system'
+
+set :sidekiq_config, 'config/sidekiq.yml'

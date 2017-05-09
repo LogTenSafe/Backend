@@ -1,8 +1,15 @@
 source 'https://rubygems.org'
 
+git_source(:github) do |repo_name|
+  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
+  "https://github.com/#{repo_name}.git"
+end
+
 # FRAMEWORK
-gem 'rails', '5.0.0.1'
+gem 'rails', '5.1.1'
 gem 'configoro'
+
+# CONTROLLERS
 gem 'responders'
 
 # MODELS
@@ -25,6 +32,9 @@ gem 'jbuilder'
 gem 'slim-rails'
 gem 'nokogiri'
 
+# JOBS
+gem 'sidekiq'
+
 # IMPORTING
 gem 'sqlite3'
 
@@ -36,17 +46,15 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 group :development do
   gem 'puma'
-
-  # CHANGE WATCHING
   gem 'listen'
-  gem 'spring'
-  gem 'spring-watcher-listen'
 
   # DEPLOYMENT
-  gem 'capistrano-rvm'
-  gem 'capistrano-bundler'
-  gem 'capistrano-rails'
-  gem 'capistrano-passenger'
+  gem 'capistrano', require: nil
+  gem 'capistrano-rvm', require: nil
+  gem 'capistrano-rails', require: nil
+  gem 'capistrano-bundler', require: nil
+  gem 'capistrano-passenger', require: nil
+  gem 'capistrano-sidekiq', require: nil
 
   # ERRORS
   gem 'better_errors'
@@ -70,5 +78,10 @@ group :test do
 end
 
 group :production do
+  # PAPERCLIP
   gem 'aws-sdk', '>= 2.0.34'
+
+  # CACHING
+  gem 'rack-cache', require: 'rack-cache'
+  gem 'redis-rails'
 end

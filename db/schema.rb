@@ -15,32 +15,32 @@ ActiveRecord::Schema.define(version: 20141220142329) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "backups", force: :cascade do |t|
-    t.integer  "user_id",                                                  null: false
-    t.string   "logbook_file_name",                                        null: false
-    t.string   "logbook_content_type",                                     null: false
-    t.string   "logbook_fingerprint",                                      null: false
-    t.integer  "logbook_file_size",                                        null: false
-    t.datetime "logbook_updated_at",                                       null: false
-    t.date     "last_flight_date"
-    t.text     "last_flight"
-    t.decimal  "total_hours",                      precision: 7, scale: 1, null: false
-    t.string   "hostname",             limit: 128
-    t.datetime "created_at",                                               null: false
-    t.datetime "updated_at",                                               null: false
-    t.index ["user_id", "created_at"], name: "index_backups_on_user_id_and_created_at", using: :btree
-    t.index ["user_id", "last_flight_date"], name: "index_backups_on_user_id_and_last_flight_date", using: :btree
-    t.index ["user_id", "logbook_fingerprint"], name: "index_backups_on_user_id_and_logbook_fingerprint", unique: true, using: :btree
-    t.index ["user_id", "total_hours"], name: "index_backups_on_user_id_and_total_hours", using: :btree
+  create_table "backups", id: :serial, force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "logbook_file_name", null: false
+    t.string "logbook_content_type", null: false
+    t.string "logbook_fingerprint", null: false
+    t.integer "logbook_file_size", null: false
+    t.datetime "logbook_updated_at", null: false
+    t.date "last_flight_date"
+    t.text "last_flight"
+    t.decimal "total_hours", precision: 7, scale: 1, null: false
+    t.string "hostname", limit: 128
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id", "created_at"], name: "index_backups_on_user_id_and_created_at"
+    t.index ["user_id", "last_flight_date"], name: "index_backups_on_user_id_and_last_flight_date"
+    t.index ["user_id", "logbook_fingerprint"], name: "index_backups_on_user_id_and_logbook_fingerprint", unique: true
+    t.index ["user_id", "total_hours"], name: "index_backups_on_user_id_and_total_hours"
   end
 
-  create_table "users", force: :cascade do |t|
-    t.string   "login",            limit: 128, null: false
-    t.string   "crypted_password", limit: 128, null: false
-    t.string   "pepper",           limit: 128, null: false
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
-    t.index ["login"], name: "index_users_on_login", unique: true, using: :btree
+  create_table "users", id: :serial, force: :cascade do |t|
+    t.string "login", limit: 128, null: false
+    t.string "crypted_password", limit: 128, null: false
+    t.string "pepper", limit: 128, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["login"], name: "index_users_on_login", unique: true
   end
 
   add_foreign_key "backups", "users"

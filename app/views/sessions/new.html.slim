@@ -11,7 +11,7 @@
 
 .row
   .col-md-4
-  = form_tag login_url, class: 'col-md-4', id: 'login-form', role: 'form' do
+  = form_with url: login_url, class: 'col-md-4', id: 'login-form', role: 'form', local: true do
     h3 Already have an account?
     input.form-control#login type="text" name="login" required="required" placeholder="login" value=params[:login]
     input.form-control#password type="password" name="password" required="required" placeholder="password" value=params[:password]

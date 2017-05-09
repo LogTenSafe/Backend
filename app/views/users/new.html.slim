@@ -2,7 +2,7 @@ h1 Get started by signing up below.
 
 .row
   .col-md-4
-  = form_for(@user, html: {role: 'form', class: 'form-horizontal col-md-4'}) do |f|
+  = form_with model: @user, html: {role: 'form', class: 'form-horizontal col-md-4'}, local: true do |f|
     .form-group= f.text_field :login, required: true, class: 'form-control', placeholder: "desired login"
     .form-group= f.password_field :password, required: true, class: 'form-control', placeholder: "desired password"
     .form-group= f.password_field :password_confirmation, required: true, class: 'form-control', placeholder: "again"
