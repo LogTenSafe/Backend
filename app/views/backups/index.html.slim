@@ -20,7 +20,7 @@
       th Last Flight
       th
     - @backups.each do |backup|
-      tr class=(backup.most_recent? ? 'active' : nil)
+      tr class=(backup.most_recent? ? 'table-active' : nil)
         td
           = l backup.created_at, format: :short
           - if backup.hostname?

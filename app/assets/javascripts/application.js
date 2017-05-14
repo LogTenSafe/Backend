@@ -14,8 +14,6 @@
 //= require jquery_ujs
 //= require turbolinks
 //
-//= require bootstrap
-//
 //= require form_with_errors
 //
 //= require_tree .

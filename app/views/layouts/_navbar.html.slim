@@ -1,17 +1,11 @@
-.navbar.navbar-default role="navigation"
-  / Brand and toggle get grouped for better mobile display
-  .navbar-header
-    button.navbar-toggle type="button" data-toggle="collapse" data-target="#navbar-collapse"
-      span.sr-only Toggle navigation
-      span.icon-bar
-      span.icon-bar
-      span.icon-bar
-    a.navbar-brand href=root_url LogTenSafe
-  / Collect the nav links, forms, and other content for toggling
-  .collapse.navbar-collapse#navbar-collapse
+nav.navbar.navbar-toggleable-md.navbar-light.bg-faded.fixed-top role="navigation"
+  button.navbar-toggler.navbar-toggler-right aria-controls="navbarNav" aria-expanded="false" aria-label=("Toggle navigation") data-target="#navbarNav" data-toggle="collapse" type="button"
+    span.navbar-toggler-icon
+  a.navbar-brand href=root_url LogTenSafe
+  #navbarNav.collapse.navbar-collapse
     - if current_user
-      ul.nav.navbar-nav.navbar-collapse
-        li class=(active_tab?(:backups) ? 'active' : nil) = link_to "Backups", backups_url
-      ul.nav.navbar-nav.navbar-right.navbar-collapse
-        li class=(active_tab?(:account) ? 'active' : nil) = link_to "My Account", edit_account_url
-        li= link_to "Log Out", logout_url
+      ul.nav.navbar-nav.mr-auto
+        li class=(active_tab?(:backups) ? 'active' : nil) = link_to "Backups", backups_url, class: 'nav-link'
+      ul.nav.navbar-nav.my-2.my-lg-0
+        li class=(active_tab?(:account) ? 'active' : nil) = link_to "My Account", edit_account_url, class: 'nav-link'
+        li= link_to "Log Out", logout_url, class: 'nav-link'

@@ -10,9 +10,9 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
- *= require bootstrap
- *= require bootstrap-theme
  *= require font-awesome
+ *
+ *= require sticky_footer
  *
  *= require_self
 */
@@ -24,4 +24,8 @@ body {
 
 footer {
     margin-top: 1in;
+}
+
+h2 small {
+    font-size: 16px;
 }

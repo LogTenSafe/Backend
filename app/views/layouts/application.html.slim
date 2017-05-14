@@ -8,24 +8,20 @@ html lang="en"
     meta name="viewport" content="width=device-width, initial-scale=1.0"
     = csrf_meta_tags
 
-    /! Le HTML5 shim, for IE6-8 support of HTML elements
-    /[if lt IE 9]
-      = javascript_include_tag '//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.1/html5shiv.js'
+    / Bootstrap
+    link crossorigin="anonymous" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" rel="stylesheet" /
+    script crossorigin="anonymous" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" src="https://code.jquery.com/jquery-3.1.1.slim.min.js"
+    script crossorigin="anonymous" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"
+    script crossorigin="anonymous" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"
 
     = stylesheet_link_tag 'application', media: 'all'
     = favicon_link_tag 'favicon.ico', rel: 'shortcut icon'
 
   body
+    = render partial: 'layouts/navbar'
     .container
-      = render partial: 'layouts/navbar'
       = render partial: 'layouts/flashes'
       = yield
-
-      footer
-        p &copy; 2014 Tim Morgan. Released under the MIT license.
-        p.small
-          | This is an open-source project.
-          |  Contribute to #{link_to "the website", 'https://github.com/LogTenSafe/website'}
-          |  or #{link_to "the Mac OS X client", 'https://github.com/LogTenSafe/MacOSX'}.
+    = render 'layouts/footer'
 
     = javascript_include_tag 'application'

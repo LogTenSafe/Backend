@@ -1,13 +1,13 @@
 h1 Get started by signing up below.
 
-.row
+.row.mt-5
   .col-md-4
   = form_with model: @user, html: {role: 'form', class: 'form-horizontal col-md-4'}, local: true do |f|
     .form-group= f.text_field :login, required: true, class: 'form-control', placeholder: "desired login"
     .form-group= f.password_field :password, required: true, class: 'form-control', placeholder: "desired password"
     .form-group= f.password_field :password_confirmation, required: true, class: 'form-control', placeholder: "again"
-    .form-group= f.submit class: 'btn btn-lg btn-default btn-block'
-    p= link_to "I already have an account.", login_url
+    .form-group= f.submit class: 'btn btn-lg btn-secondary btn-block'
+    p.mt-4= link_to "I already have an account.", login_url
   .col-md-4
 
 sass:
