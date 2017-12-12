@@ -2,14 +2,14 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   describe '#authentic?' do
-    subject { FactoryGirl.create(:user, password: 'example password') }
+    subject { FactoryBot.create(:user, password: 'example password') }
 
     it { is_expected.to be_authentic('example password') }
     it { is_expected.not_to be_authentic('another password') }
   end
 
   describe '.authenticate' do
-    let(:user) { FactoryGirl.create(:user, password: 'some password') }
+    let(:user) { FactoryBot.create(:user, password: 'some password') }
     subject { User.authenticate(login, password) }
 
     context "with correct credentials" do
@@ -35,7 +35,7 @@ RSpec.describe User, type: :model do
   end
 
   describe 'password' do
-    subject { FactoryGirl.create(:user) }
+    subject { FactoryBot.create(:user) }
 
     context '[newly created]' do
       its(:crypted_password) { should_not be_nil }
@@ -48,13 +48,13 @@ RSpec.describe User, type: :model do
     end
 
     context "not given to a newly-created user" do
-      subject { FactoryGirl.build(:user, password: nil) }
+      subject { FactoryBot.build(:user, password: nil) }
 
       it { is_expected.not_to be_valid }
     end
 
     context "existing user" do
-      subject { FactoryGirl.create(:user) }
+      subject { FactoryBot.create(:user) }
       before { subject.update_attributes attrs }
 
       context "login changed only" do
@@ -75,7 +75,7 @@ RSpec.describe User, type: :model do
   end
 
   describe 'pepper' do
-    subject { FactoryGirl.create(:user) }
+    subject { FactoryBot.create(:user) }
     its(:pepper) { should_not be_nil }
   end
 end

@@ -6,7 +6,7 @@ git_source(:github) do |repo_name|
 end
 
 # FRAMEWORK
-gem 'rails', '5.1.3'
+gem 'rails', '5.1.4'
 gem 'configoro'
 
 # CONTROLLERS
@@ -73,13 +73,13 @@ group :test do
   gem 'rails-controller-testing'
 
   # FACTORIES/DB
-  gem 'factory_girl_rails'
+  gem 'factory_bot_rails'
   gem 'database_cleaner'
 end
 
 group :production do
   # PAPERCLIP
-  gem 'aws-sdk', '>= 2.0.34'
+  gem 'aws-sdk-s3'
 
   # CACHING
   gem 'rack-cache', require: 'rack-cache'

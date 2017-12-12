@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.describe BackupsController, type: :controller do
   describe '#index' do
     before :all do
-      @user    = FactoryGirl.create(:user)
-      @backups = FactoryGirl.create_list(:backup, 15, user: @user).sort_by(&:created_at).reverse
+      @user    = FactoryBot.create(:user)
+      @backups = FactoryBot.create_list(:backup, 15, user: @user).sort_by(&:created_at).reverse
     end
 
     before(:each) { login_as @user }
@@ -17,7 +17,7 @@ RSpec.describe BackupsController, type: :controller do
 
   describe '#show' do
     before :each do
-      @backup = FactoryGirl.create(:backup)
+      @backup = FactoryBot.create(:backup)
       api_login_as @backup.user, 'password123'
     end
 

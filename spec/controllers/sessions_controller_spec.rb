@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe SessionsController, type: :controller do
   describe '#create' do
-    before(:all) { @user = FactoryGirl.create(:user, password: 'hello world') }
+    before(:all) { @user = FactoryBot.create(:user, password: 'hello world') }
 
     context '[valid credentials]' do
       it "should log the user in and redirect to the next URL if given" do
@@ -28,7 +28,7 @@ RSpec.describe SessionsController, type: :controller do
   end
 
   describe '#destroy' do
-    before(:each) { login_as(@user = FactoryGirl.create(:user)) }
+    before(:each) { login_as(@user = FactoryBot.create(:user)) }
     it "should log the user out and go to the root URL" do
       delete :destroy
       expect(response).to redirect_to('/')

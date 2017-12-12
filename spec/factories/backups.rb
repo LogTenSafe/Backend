@@ -1,6 +1,6 @@
 require 'securerandom'
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :backup do
     association :user
     logbook { File.open Rails.root.join('spec', 'fixtures', 'backup.sql') }
