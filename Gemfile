@@ -79,7 +79,7 @@ end
 
 group :production do
   # PAPERCLIP
-  gem 'aws-sdk-s3'
+  gem 'aws-sdk', '~> 2.3.0'
 
   # CACHING
   gem 'rack-cache', require: 'rack-cache'
