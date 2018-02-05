@@ -13,7 +13,7 @@ gem 'configoro'
 gem 'responders'
 
 # MODELS
-gem 'pg'
+gem 'pg', '< 1.0'
 gem 'paperclip'
 
 # ASSETS
