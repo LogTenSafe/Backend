@@ -6,7 +6,7 @@ git_source(:github) do |repo_name|
 end
 
 # FRAMEWORK
-gem 'rails', '5.1.4'
+gem 'rails', '5.1.5'
 gem 'configoro'
 
 # CONTROLLERS
@@ -79,7 +79,7 @@ end
 
 group :production do
   # PAPERCLIP
-  gem 'aws-sdk', '~> 2.3.0'
+  gem 'aws-sdk-s3'
 
   # CACHING
   gem 'rack-cache', require: 'rack-cache'
