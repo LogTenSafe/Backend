@@ -6,7 +6,7 @@ git_source(:github) do |repo_name|
 end
 
 # FRAMEWORK
-gem 'rails', '5.1.5'
+gem 'rails', '5.1.6'
 gem 'configoro'
 
 # CONTROLLERS
@@ -49,12 +49,12 @@ group :development do
   gem 'listen'
 
   # DEPLOYMENT
-  gem 'capistrano', require: nil
-  gem 'capistrano-rvm', require: nil
-  gem 'capistrano-rails', require: nil
-  gem 'capistrano-bundler', require: nil
-  gem 'capistrano-passenger', require: nil
-  gem 'capistrano-sidekiq', require: nil
+  gem 'capistrano', require: false
+  gem 'capistrano-rvm', require: false
+  gem 'capistrano-rails', require: false
+  gem 'capistrano-bundler', require: false
+  gem 'capistrano-passenger', require: false
+  gem 'capistrano-sidekiq', require: false
 
   # ERRORS
   gem 'better_errors'
