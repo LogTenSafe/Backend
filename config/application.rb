@@ -29,5 +29,8 @@ module LogTenSafe
       g.integration_tool    :rspec
       g.fixture_replacement :factory_bot, dir: 'spec/factories'
     end
+
+    require 'logbook_analyzer'
+    config.active_storage.analyzers.append LogbookAnalyzer
   end
 end

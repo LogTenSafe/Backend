@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   include Authentication
   before_action :login_required
 
-  protect_from_forgery with: :exception
+  before_action :set_storage_host
 
   rescue_from(ActiveRecord::RecordNotFound) do |err|
     respond_to do |format|
@@ -14,5 +14,12 @@ class ApplicationController < ActionController::Base
       format.json { render json: {error: err.to_s}, status: :not_found }
       format.any { head :not_found }
     end
+  end
+
+  private
+
+  def set_storage_host
+    # really only needed for DiskService in dev/test
+    ActiveStorage::Current.host = request.base_url
   end
 end

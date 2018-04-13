@@ -39,11 +39,11 @@ and managed using [Configoro](https://github.com/RISCfuture/Configoro).
 
 ### Models
 
-Logbook data is stored using
-[Paperclip](https://github.com/thoughtbot/paperclip). In development mode,
-logbook files are stored locally in `public/system`. In production mode, they
-are stored using S3. Paperclip provides normalized access to these files using
-the `Paperclip.io_adapters` method.
+Logbook data is stored using Active Storage. In development, logbook files are
+stored locally in the `storage` directory. In production, they are stored using
+S3. Active Storage provides normalized access to these files. The
+{LogbookAnalyzer} class loads the logbook using the SQLite gem and records
+metadata about the logbook.
 
 Pagination is handled by Kaminari.
 

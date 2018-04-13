@@ -2,14 +2,6 @@ en:
   activerecord:
     errors:
       models:
-        backup:
-          attributes:
-            logbook_content_type:
-              inclusion: not a LogTen Pro logbook file
-            logbook_size:
-              less_than: must be smaller than 20 megabytes
-            logbook_fingerprint:
-              taken: has already been uploaded
         user:
           attributes:
             password:
@@ -17,12 +9,7 @@ en:
     attributes:
       backup:
         user_id: user
-        logbook_content_type: logbook
-        logbook_file_size: logbook
-        logbook_fingerprint: logbook
-        last_flight_date: date of last flight
-        last_flight: last flight
-        total_hours: total hours
+        logbook: logbook
       user:
         login: login
         crypted_password: password

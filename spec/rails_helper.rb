@@ -58,6 +58,10 @@ RSpec.configure do |config|
       example.run
     end
   end
+
+  config.after(:suite) do
+    FileUtils.rm_rf Rails.root.join('tmp', 'storage')
+  end
 end
 
 def login_as(user)

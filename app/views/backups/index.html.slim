@@ -28,8 +28,8 @@
             small Uploaded from #{backup.hostname}
         td= number_with_delimiter backup.total_hours
         td
-          - if backup.last_flight_date && backup.last_flight.present?
-            strong= l backup.last_flight_date, format: :short
+          - if backup.last_flight.present?
+            strong= l Date.parse(backup.last_flight['date']), format: :short
             |  (#{number_with_delimiter backup.last_flight['duration']} hr)
             br
             small #{backup.last_flight['origin']} &rarr; #{backup.last_flight['destination']}
@@ -37,7 +37,7 @@
             | No flights
         td
           = link_to "Download", backup_url(backup, format: 'gz')
-          |  (#{number_to_human_size backup.logbook_file_size})
+          |  (#{number_to_human_size backup.logbook.byte_size})
           br
           = link_to "Delete", backup, class: 'text-danger', method: :delete, data: {confirm: "This cannot be undone. Are you sure you want to delete this backup?"}
 

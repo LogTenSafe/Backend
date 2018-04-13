@@ -2,6 +2,8 @@
 # uploader software uses, and the controller end-users use to browse backups.
 
 class BackupsController < ApplicationController
+  include Streaming
+
   before_action :find_backup, except: [:index, :create]
   skip_before_action :verify_authenticity_token, only: :create
 
@@ -21,20 +23,10 @@ class BackupsController < ApplicationController
   def show
     respond_with @backup do |format|
       format.gz do
-        # copy data to a tempfile
-        tempfile = Tempfile.new(%w(LogTenCoreDataStore sql))
-        File.open(tempfile, 'wb') do |f|
-          adapter = Paperclip.io_adapters.for(@backup.logbook)
-          while (buffer = adapter.read(2048))
-            f << buffer
-          end
-          adapter.rewind
-        end
-        # compress tempfile
-        IO.popen(['gzip', '--stdout', tempfile.path]) do |out|
-          send_data out.read,
-                    filename: "LogTenCoreDataStore.sql.gz",
-                    type:     'application/gzip'
+        if @backup.logbook.attached?
+          stream @backup.logbook.service_url
+        else
+          head :not_found
         end
       end
     end

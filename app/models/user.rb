@@ -4,7 +4,7 @@ require 'digest/sha2'
 # A user of this website, who uploads logbook {Backup backups}. Users' passwords
 # are hashed with a salt and pepper, which is automatically generated. When a
 # User is deleted, all his/her backups are instantiated and destroyed so that
-# Paperclip can remove the corresponding files as well.
+# Active Storage can remove the corresponding files as well.
 #
 # To change the user's password, set the `password` attribute. It will
 # automatically be encoded into the `crypted_password` field when the User is
