@@ -36,7 +36,7 @@
           - else
             | No flights
         td
-          = link_to "Download", backup_url(backup, format: 'gz')
+          = link_to "Download", backup_url(backup, format: 'sql')
           |  (#{number_to_human_size backup.logbook.byte_size})
           br
           = link_to "Delete", backup, class: 'text-danger', method: :delete, data: {confirm: "This cannot be undone. Are you sure you want to delete this backup?"}

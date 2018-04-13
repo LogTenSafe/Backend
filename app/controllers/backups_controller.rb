@@ -8,7 +8,7 @@ class BackupsController < ApplicationController
   skip_before_action :verify_authenticity_token, only: :create
 
   respond_to :html, :json, except: :show
-  respond_to :gz, only: :show
+  respond_to :sql, only: :show
 
   # Displays a list of backups, 50 at a time. Pagination information is stored
   # in the `X-Page` and `X-Pages` headers.
@@ -22,7 +22,7 @@ class BackupsController < ApplicationController
 
   def show
     respond_with @backup do |format|
-      format.gz do
+      format.sql do
         if @backup.logbook.attached?
           stream @backup.logbook.service_url
         else

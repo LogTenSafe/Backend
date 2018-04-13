@@ -24,8 +24,8 @@ RSpec.describe BackupsController, type: :controller do
       api_login_as @backup.user, 'password123'
     end
 
-    it "should send a gzipped copy of the backup" do
-      get :show, params: {id: @backup.to_param, format: 'gz'}
+    it "should send a copy of the backup" do
+      get :show, params: {id: @backup.to_param, format: 'sql'}
       skip "No way to test this without running a web server"
       expect(response.status).to eql(200)
     end

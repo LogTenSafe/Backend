@@ -8,7 +8,7 @@ json.array! @backups do |backup|
   json.last_flight backup.last_flight
   json.total_hours backup.total_hours
   json.hostname backup.hostname
-  json.download_url backup_url(backup, format: 'gz')
+  json.download_url backup_url(backup, format: 'sql')
 
   json.logbook do
     json.size backup.logbook.byte_size
