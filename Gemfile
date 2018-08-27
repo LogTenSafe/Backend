@@ -18,10 +18,8 @@ gem 'pg', '< 1.0'
 
 # ASSETS
 gem 'sass-rails'
-gem 'less-rails'
 gem 'uglifier'
 gem 'coffee-rails'
-gem 'therubyracer', platforms: :ruby
 gem 'jquery-rails'
 gem 'turbolinks'
 gem 'font-awesome-rails'
