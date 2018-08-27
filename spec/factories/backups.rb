@@ -4,7 +4,7 @@ FactoryBot.define do
   factory :backup do
     association :user
     logbook { Rails.root.join('spec', 'fixtures', 'backup.sql') }
-    hostname 'test-host'
+    hostname { FFaker::Internet.domain_name }
 
     after :build do |backup, evaluator|
       if evaluator.logbook

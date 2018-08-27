@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :user do
     sequence(:login) { |i| "user-#{i}" }
-    password 'password123'
+    password { FFaker::Internet.password }
   end
 end
