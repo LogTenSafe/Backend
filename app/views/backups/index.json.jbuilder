@@ -15,5 +15,5 @@ json.array! @backups do |backup|
   end if backup.logbook.attached?
 
   # LEGACY
-  json.last_flight_date backup.last_flight['date']
+  json.last_flight_date backup.last_flight&.fetch('date')
 end
