@@ -44,7 +44,7 @@ RSpec.describe User, type: :model do
     it "should change when the password changes" do
       user = subject
       expect { user.update_attributes(password: 'new', password_confirmation: 'new') }.
-        to change(user, :crypted_password)
+          to change(user, :crypted_password)
     end
 
     context "not given to a newly-created user" do
@@ -58,17 +58,17 @@ RSpec.describe User, type: :model do
       before { subject.update_attributes attrs }
 
       context "login changed only" do
-        let(:attrs) { { login: 'another' } }
+        let(:attrs) { {login: 'another'} }
         it { is_expected.to be_valid }
       end
 
       context "login and password changed without confirmation" do
-        let(:attrs) { { login: 'another2', password: 'another' } }
+        let(:attrs) { {login: 'another2', password: 'another'} }
         it { is_expected.to be_valid }
       end
 
       context "login and password changed with confirmation" do
-        let(:attrs) { { login: 'another3', password: 'another', password_confirmation: 'another' } }
+        let(:attrs) { {login: 'another3', password: 'another', password_confirmation: 'another'} }
         it { is_expected.to be_valid }
       end
     end

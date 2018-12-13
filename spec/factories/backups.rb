@@ -7,9 +7,7 @@ FactoryBot.define do
     hostname { FFaker::Internet.domain_name }
 
     after :build do |backup, evaluator|
-      if evaluator.logbook
-        backup.logbook.attach io: evaluator.logbook.open, filename: 'backup.sql', content_type: 'application/x-sqlite3'
-      end
+      backup.logbook.attach(io: evaluator.logbook.open, filename: 'backup.sql', content_type: 'application/x-sqlite3') if evaluator.logbook
     end
   end
 end

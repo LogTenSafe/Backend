@@ -28,14 +28,14 @@ class User < ApplicationRecord
 
   validates :login, :crypted_password, :pepper,
             presence: true,
-            length:   { within: 2..128 }
+            length:   {within: 2..128}
   validates :login,
             uniqueness: true
   validates :password,
             confirmation: true,
-            length:       { minimum: 4 },
-            exclusion:    { in: %w(password 1234 12345 123456 letmein) },
-            allow_nil:    { on: :update }
+            length:       {minimum: 4},
+            exclusion:    {in: %w[password 1234 12345 123456 letmein]},
+            allow_nil:    {on: :update}
 
   before_validation :set_pepper
   before_validation :encrypt_password, if: :password
@@ -58,7 +58,12 @@ class User < ApplicationRecord
 
   def self.authenticate(login, password)
     user = User.find_by_login(login)
-    (user && user.authentic?(password)) ? user : nil
+    (user&.authentic?(password)) ? user : nil
+  end
+
+  # @private
+  def self.digest
+    Digest::SHA2.new.update(LogTenSafe::Configuration.secrets.authentication_salt)
   end
 
   private
@@ -73,9 +78,5 @@ class User < ApplicationRecord
 
   def digest
     self.class.digest.update(pepper)
-  end
-
-  def self.digest
-    Digest::SHA2.new.update(LogTenSafe::Configuration.secrets.authentication_salt)
   end
 end

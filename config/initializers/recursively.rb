@@ -23,11 +23,9 @@ module Enumerable
   # @return [Enumerable] The receiver.
 
   def recursively!(include_other_types: false, &block)
-    instance_eval &block
+    instance_eval(&block)
     each do |element|
-      if (include_other_types && element.respond_to?(:recursively!)) || element.kind_of?(self.class)
-        element.recursively!(include_other_types: include_other_types, &block)
-      end
+      element.recursively!(include_other_types: include_other_types, &block) if (include_other_types && element.respond_to?(:recursively!)) || element.kind_of?(self.class)
     end
     return self
   end
@@ -61,11 +59,9 @@ class Hash
   # @see Enumerable#recursively!
 
   def recursively!(include_other_types: false, &block)
-    instance_eval &block
+    instance_eval(&block)
     each do |_, element|
-      if (include_other_types && element.respond_to?(:recursively!)) || element.kind_of?(Hash)
-        element.recursively!(include_other_types: include_other_types, &block)
-      end
+      element.recursively!(include_other_types: include_other_types, &block) if (include_other_types && element.respond_to?(:recursively!)) || element.kind_of?(Hash)
     end
     return self
   end
@@ -76,6 +72,6 @@ class Hash
   # @see Enumerable#prune!
 
   def prune!(nil_only: false)
-    delete_if { |k, v| nil_only ? v.nil? : v.blank? }
+    delete_if { |_k, v| nil_only ? v.nil? : v.blank? }
   end
 end

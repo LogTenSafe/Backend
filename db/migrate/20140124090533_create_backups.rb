@@ -3,7 +3,7 @@ class CreateBackups < ActiveRecord::Migration[4.2]
     create_table :backups do |t|
       t.belongs_to :user, null: false
 
-      #t.attachment :logbook
+      # t.attachment :logbook
       t.string :logbook_file_name, :logbook_content_type, :logbook_fingerprint, null: false
       t.integer :logbook_file_size, null: false
       t.datetime :logbook_updated_at, null: false
@@ -18,10 +18,10 @@ class CreateBackups < ActiveRecord::Migration[4.2]
     end
 
     change_table :backups do |t|
-      t.index [:user_id, :last_flight_date]
-      t.index [:user_id, :created_at]
-      t.index [:user_id, :total_hours]
-      t.index [:user_id, :logbook_fingerprint], unique: true
+      t.index %i[user_id last_flight_date]
+      t.index %i[user_id created_at]
+      t.index %i[user_id total_hours]
+      t.index %i[user_id logbook_fingerprint], unique: true
     end
   end
 end

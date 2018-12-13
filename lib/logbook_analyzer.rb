@@ -12,12 +12,12 @@ class LogbookAnalyzer < ActiveStorage::Analyzer
   def metadata
     {
         total_hours: total_hours,
-        last_flight: (last_flight ? {
+        last_flight: ({
             date:        flight_date(last_flight),
             origin:      flight_origin(last_flight),
             destination: flight_destination(last_flight),
             duration:    flight_duration(last_flight)
-        } : nil)
+        } if last_flight)
     }
   end
 
@@ -47,12 +47,14 @@ class LogbookAnalyzer < ActiveStorage::Analyzer
     @last_flight ||= begin
       columns, last_flight = db.execute2('SELECT * FROM ZFLIGHT ORDER BY ZFLIGHT_FLIGHTDATE DESC LIMIT 1').first(2)
       return nil if last_flight.nil?
+
       Hash[*columns.zip(last_flight).flatten]
     end
   end
 
   def flight_date(flight)
     return nil unless flight
+
     Time.utc(2001).advance(seconds: flight['ZFLIGHT_FLIGHTDATE']).utc.to_date
   end
 

@@ -2,7 +2,7 @@
 
 ActiveSupport::Reloader.to_prepare do
   ApplicationController.renderer.defaults.merge!(
-      http_host: 'logtensafe.com',
-      https:     true
+    http_host: 'logtensafe.com',
+    https:     true
   )
 end

@@ -6,9 +6,9 @@ git_source(:github) do |repo_name|
 end
 
 # FRAMEWORK
-gem 'rails', '5.2.2'
-gem 'configoro'
 gem 'bootsnap'
+gem 'configoro'
+gem 'rails', '5.2.2'
 
 # CONTROLLERS
 gem 'responders'
@@ -17,18 +17,18 @@ gem 'responders'
 gem 'pg', '< 1.0'
 
 # ASSETS
-gem 'sass-rails'
-gem 'uglifier'
 gem 'coffee-rails'
-gem 'jquery-rails'
-gem 'turbolinks'
 gem 'font-awesome-rails'
+gem 'jquery-rails'
+gem 'sass-rails'
 gem 'sprockets-rails'
+gem 'turbolinks'
+gem 'uglifier'
 
 # VIEWS
 gem 'jbuilder'
-gem 'slim-rails'
 gem 'nokogiri'
+gem 'slim-rails'
 
 # JOBS
 gem 'sidekiq'
@@ -40,11 +40,11 @@ gem 'sqlite3'
 gem 'whenever'
 
 # OTHER
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 group :development do
-  gem 'puma'
   gem 'listen'
+  gem 'puma'
 
   # ERRORS
   gem 'better_errors'
@@ -52,19 +52,19 @@ group :development do
 end
 
 group :doc do
-  gem 'yard', require: false
   gem 'redcarpet', require: 'false'
+  gem 'yard', require: false
 end
 
 group :test do
   # SPECS
-  gem 'rspec-rails'
-  gem 'rspec-its', require: 'rspec/its'
   gem 'rails-controller-testing'
+  gem 'rspec-its', require: 'rspec/its'
+  gem 'rspec-rails'
 
   # FACTORIES/DB
-  gem 'factory_bot_rails'
   gem 'database_cleaner'
+  gem 'factory_bot_rails'
   gem 'ffaker'
 end
 

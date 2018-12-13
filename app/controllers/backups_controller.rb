@@ -4,7 +4,7 @@
 class BackupsController < ApplicationController
   include Streaming
 
-  before_action :find_backup, except: [:index, :create]
+  before_action :find_backup, except: %i[index create]
   skip_before_action :verify_authenticity_token, only: :create
 
   respond_to :html, :json, except: :show

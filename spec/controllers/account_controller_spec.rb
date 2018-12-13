@@ -12,4 +12,3 @@ RSpec.describe AccountController, type: :controller do
     end
   end
 end
-

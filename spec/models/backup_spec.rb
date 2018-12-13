@@ -3,12 +3,14 @@ require 'rails_helper'
 RSpec.describe Backup, type: :model do
   describe 'last_flight' do
     subject { FactoryBot.create(:backup).tap { |b| b.logbook.analyze }.last_flight }
-    it { is_expected.to eql({
-                                'origin'      => 'LVK',
-                                'destination' => 'SQL',
-                                'duration'    => 0.6,
-                                'date'        => '2014-01-15'
-                            }) }
+    it {
+      is_expected.to eql(
+        'origin'      => 'LVK',
+        'destination' => 'SQL',
+        'duration'    => 0.6,
+        'date'        => '2014-01-15'
+      )
+    }
   end
 
   describe 'total_hours' do
