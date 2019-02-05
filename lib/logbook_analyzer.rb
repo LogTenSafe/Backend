@@ -5,7 +5,8 @@ class LogbookAnalyzer < ActiveStorage::Analyzer
 
   # @private
   def self.accept?(blob)
-    blob.content_type == 'application/x-sqlite3'
+    blob.content_type == 'application/x-sqlite3' ||
+        blob.content_type == 'application/vnd.sqlite3'
   end
 
   # @private
