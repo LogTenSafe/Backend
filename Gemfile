@@ -8,7 +8,7 @@ end
 # FRAMEWORK
 gem 'bootsnap'
 gem 'configoro'
-gem 'rails', '5.2.2'
+gem 'rails', '5.2.2.1'
 
 # CONTROLLERS
 gem 'responders'
