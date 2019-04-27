@@ -42,6 +42,9 @@ gem 'whenever'
 # OTHER
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
+# ERROR TRACKING
+gem 'bugsnag'
+
 group :development do
   gem 'listen'
   gem 'puma'
