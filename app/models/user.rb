@@ -63,7 +63,7 @@ class User < ApplicationRecord
 
   # @private
   def self.digest
-    Digest::SHA2.new.update(LogTenSafe::Configuration.secrets.authentication_salt)
+    Digest::SHA2.new.update(Rails.application.credentials.authentication_salt)
   end
 
   private

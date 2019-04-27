@@ -13,13 +13,13 @@ Rails.application.routes.draw do
 
   if Rails.env.production?
     require 'sidekiq/web'
-    creds = YAML.load_file('config/sidekiq_web_credentials.yml')
+    creds = Rails.application.credentials.sidekiq_web
     Sidekiq::Web.use Rack::Auth::Basic do |username, password|
       # Protect against timing attacks: (https://codahale.com/a-lesson-in-timing-attacks/)
       # - Use & (do not use &&) so that it doesn't short circuit.
       # - Use `secure_compare` to stop length information leaking
-      ActiveSupport::SecurityUtils.secure_compare(username, creds['username']) &
-          ActiveSupport::SecurityUtils.secure_compare(password, creds['password'])
+      ActiveSupport::SecurityUtils.secure_compare(username, creds[:username]) &
+          ActiveSupport::SecurityUtils.secure_compare(password, creds[:password])
     end
     mount Sidekiq::Web => '/sidekiq'
   end
