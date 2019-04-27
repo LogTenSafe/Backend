@@ -15,6 +15,7 @@ html lang="en"
     script crossorigin="anonymous" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"
 
     = stylesheet_link_tag 'application', media: 'all'
+    = javascript_include_tag 'application', defer: true, nonce: true
     = favicon_link_tag 'favicon.ico', rel: 'shortcut icon'
 
   body
@@ -23,5 +24,3 @@ html lang="en"
       = render partial: 'layouts/flashes'
       = yield
     = render 'layouts/footer'
-
-    = javascript_include_tag 'application', nonce: true
