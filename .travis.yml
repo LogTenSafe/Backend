@@ -1,0 +1,16 @@
+language: ruby
+rvm:
+- 2.6.3
+postgres:
+  adapter: postgresql
+  database: LogTenSafe_test
+  username: LogTenSafe
+before_install:
+  - gem update --system
+  - gem install bundler
+before_script:
+- createuser LogTenSafe
+- createdb -O LogTenSafe LogTenSafe_test
+- bundle exec rails db:migrate
+env:
+  secure: g20CU7Qqb511Fk1wo4CMQvoDerz+yt8XIGX08W8+KiAOYsBQ57gg7/d6ci6dkFLZxo5hBz9xAQWMiqt0W8R9JgvHCFxvOC2bSTyvXse1oIPBLX227vyyf7e7iziJ7de5Pu8OM0zFlY9Y8bMQ+EC88tDvjz6RlI8yWVMdupyVLH0=
