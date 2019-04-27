@@ -13,8 +13,8 @@
   .col-md-3
   = form_with url: login_url, class: 'col-md-6', id: 'login-form', role: 'form', local: true do
     h3.mb-3 Already have an account?
-    input.form-control#login type="text" name="login" required="required" placeholder="login" value=params[:login]
-    input.form-control#password type="password" name="password" required="required" placeholder="password" value=params[:password]
+    input.form-control#login type="text" name="login" required="required" placeholder="login" value=params[:login] autocomplete="username"
+    input.form-control#password type="password" name="password" required="required" placeholder="password" value=params[:password] autocomplete="current-password"
     input type="hidden" name="next" value=params[:next]
     input.btn.btn-md.btn-secondary.btn-block type="submit" value="Log in"
   .col-md-3

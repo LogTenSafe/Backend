@@ -1,9 +1,9 @@
 h2.mb-3 Would you like to change your login or password?
 
 = form_with model: current_user, url: account_url, html: {role: 'form', class: 'form-inline'}, local: true do |f|
-  .form-group.mr-3= f.text_field :login, required: true, class: 'form-control', placeholder: "desired login"
-  .form-group.mr-3= f.password_field :password, required: true, class: 'form-control', placeholder: "desired password"
-  .form-group.mr-3= f.password_field :password_confirmation, required: true, class: 'form-control', placeholder: "again"
+  .form-group.mr-3= f.text_field :login, required: true, class: 'form-control', placeholder: "desired login", autocomplete: 'username'
+  .form-group.mr-3= f.password_field :password, required: true, class: 'form-control', placeholder: "desired password", autocomplete: 'new-password'
+  .form-group.mr-3= f.password_field :password_confirmation, required: true, class: 'form-control', placeholder: "again", autocomplete: 'new-password'
   .form-group.mr-3= f.submit class: 'btn btn-primary'
 
 sass:
