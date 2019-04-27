@@ -8,13 +8,13 @@ end
 # FRAMEWORK
 gem 'bootsnap'
 gem 'configoro'
-gem 'rails', '5.2.2.1'
+gem 'rails', '5.2.3'
 
 # CONTROLLERS
 gem 'responders'
 
 # MODELS
-gem 'pg', '< 1.0'
+gem 'pg'
 
 # ASSETS
 gem 'coffee-rails'
@@ -74,4 +74,7 @@ group :production do
 
   # CACHING
   gem 'redis'
+
+  # CONSOLE
+  gem 'irb', require: false
 end
