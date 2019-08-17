@@ -4,13 +4,20 @@ rvm:
 services:
 - postgresql
 addons:
-  postgresql: "9.6"
+  postgresql: '11.4'
 before_install:
-  - gem update --system
-  - gem install bundler
+- gem update --system
+- gem install bundler
+- sudo apt-get update
+- sudo apt-get --yes remove postgresql\*
+- sudo apt-get install -y postgresql-11 postgresql-client-11
+- sudo cp /etc/postgresql/{9.6,11}/main/pg_hba.conf
+- sudo service postgresql restart 11
 before_script:
 - createuser LogTenSafe
 - createdb -O LogTenSafe LogTenSafe_test
-- bundle exec rails db:migrate
 env:
-  secure: g20CU7Qqb511Fk1wo4CMQvoDerz+yt8XIGX08W8+KiAOYsBQ57gg7/d6ci6dkFLZxo5hBz9xAQWMiqt0W8R9JgvHCFxvOC2bSTyvXse1oIPBLX227vyyf7e7iziJ7de5Pu8OM0zFlY9Y8bMQ+EC88tDvjz6RlI8yWVMdupyVLH0=
+  global:
+    - secure: fwyJxzk0n9jj5Ohj292mUYqDScxFCZH1PuBWTMOjtuq3AJOp3xpyskRt0xvR1hWGxbMduPbHb03UE4USHPXYs7x82ILEKWHnZZvKNmuXDp3wYAXyUu/loJkU0a4Wq8VxB5wUWTAfxJoNBC/32/fJ1wMO0czwB3ptEbuP7GwlW0c=
+    - RAILS_TEST_DB_USER=postgres
+    - PGUSER=postgres

@@ -6,7 +6,7 @@ h2.mb-3 Would you like to change your login or password?
   .form-group.mr-3= f.password_field :password_confirmation, required: true, class: 'form-control', placeholder: "again", autocomplete: 'new-password'
   .form-group.mr-3= f.submit class: 'btn btn-primary'
 
-sass:
+sass nonce=content_security_policy_nonce:
   .form-group
     margin: 0
     padding: 0

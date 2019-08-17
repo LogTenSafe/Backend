@@ -43,7 +43,7 @@ RSpec.describe User, type: :model do
 
     it "should change when the password changes" do
       user = subject
-      expect { user.update_attributes(password: 'new', password_confirmation: 'new') }.
+      expect { user.update(password: 'new', password_confirmation: 'new') }.
           to change(user, :crypted_password)
     end
 
@@ -55,7 +55,7 @@ RSpec.describe User, type: :model do
 
     context "existing user" do
       subject { FactoryBot.create(:user) }
-      before { subject.update_attributes attrs }
+      before { subject.update attrs }
 
       context "login changed only" do
         let(:attrs) { {login: 'another'} }

@@ -2,7 +2,7 @@ require 'securerandom'
 
 FactoryBot.define do
   factory :backup do
-    association :user
+    user
     logbook { Rails.root.join('spec', 'fixtures', 'backup.sql') }
     hostname { FFaker::Internet.domain_name }
 

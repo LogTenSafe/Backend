@@ -19,6 +19,8 @@ development:
 test:
   <<: *default
   database: LogTenSafe_test
+  username: <%= ENV.fetch('RAILS_TEST_DB_USER') { 'tmorgan' } %>
+  owner: LogTenSafe
 
 production:
   <<: *default

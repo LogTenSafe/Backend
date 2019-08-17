@@ -43,7 +43,7 @@
 
   p= link_to "Need to re-download the uploader software?", LogTenSafe::Configuration.links.osx_download
 
-sass:
+sass nonce=content_security_policy_nonce:
   ul.pagination
     margin-top: 0
 

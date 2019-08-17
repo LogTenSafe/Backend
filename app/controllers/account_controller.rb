@@ -12,7 +12,7 @@ class AccountController < ApplicationController
   # Modifies a user's account.
 
   def update
-    current_user.update_attributes account_params
+    current_user.update account_params
     flash[:success] = t('controllers.account.update.success') if current_user.valid?
     respond_with current_user, location: edit_account_url
   end

@@ -10,7 +10,7 @@ h1 Get started by signing up below.
     p.mt-4= link_to "I already have an account.", login_url
   .col-md-4
 
-sass:
+sass nonce=content_security_policy_nonce:
   .form-group
     margin: 0
     padding: 0
