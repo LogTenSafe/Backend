@@ -7,7 +7,7 @@ set :application, 'logtensafe'
 set :repo_url, 'https://github.com/LogTenSafe/website.git'
 
 set :deploy_to, '/var/www/www.logtensafe.com'
-set :rvm_ruby_version, "2.6.4@#{fetch :application}"
+set :rvm_ruby_version, "2.6.5@#{fetch :application}"
 
 append :linked_files, 'config/master.key', 'config/sidekiq.yml'
 
@@ -17,6 +17,6 @@ append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets',
 set :bugsnag_api_key, Rails.application.credentials.bugsnag_api_key
 
 set :default_env,
-    'PATH' => '/usr/local/nvm/versions/node/v11.11.0/bin:$PATH'
+    'PATH' => '/usr/local/nvm/versions/node/v12.11.1/bin:$PATH'
 
 set :passenger_restart_with_sudo, true

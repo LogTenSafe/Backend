@@ -27,7 +27,7 @@ gem 'nokogiri'
 gem 'slim-rails'
 
 # JOBS
-gem 'sidekiq'
+gem 'sidekiq', '< 6'
 
 # IMPORTING
 gem 'sqlite3'
