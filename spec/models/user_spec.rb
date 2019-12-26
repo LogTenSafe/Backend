@@ -9,8 +9,9 @@ RSpec.describe User, type: :model do
   end
 
   describe '.authenticate' do
+    subject { described_class.authenticate(login, password) }
+
     let(:user) { FactoryBot.create(:user, password: 'some password') }
-    subject { User.authenticate(login, password) }
 
     context "with correct credentials" do
       let(:login) { user.login }
@@ -38,7 +39,7 @@ RSpec.describe User, type: :model do
     subject { FactoryBot.create(:user) }
 
     context '[newly created]' do
-      its(:crypted_password) { should_not be_nil }
+      its(:crypted_password) { is_expected.not_to be_nil }
     end
 
     it "should change when the password changes" do
@@ -55,20 +56,24 @@ RSpec.describe User, type: :model do
 
     context "existing user" do
       subject { FactoryBot.create(:user) }
-      before { subject.update attrs }
+
+      before(:each) { subject.update attrs }
 
       context "login changed only" do
         let(:attrs) { {login: 'another'} }
+
         it { is_expected.to be_valid }
       end
 
       context "login and password changed without confirmation" do
         let(:attrs) { {login: 'another2', password: 'another'} }
+
         it { is_expected.to be_valid }
       end
 
       context "login and password changed with confirmation" do
         let(:attrs) { {login: 'another3', password: 'another', password_confirmation: 'another'} }
+
         it { is_expected.to be_valid }
       end
     end
@@ -76,6 +81,7 @@ RSpec.describe User, type: :model do
 
   describe 'pepper' do
     subject { FactoryBot.create(:user) }
-    its(:pepper) { should_not be_nil }
+
+    its(:pepper) { is_expected.not_to be_nil }
   end
 end

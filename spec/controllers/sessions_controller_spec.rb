@@ -29,6 +29,7 @@ RSpec.describe SessionsController, type: :controller do
 
   describe '#destroy' do
     before(:each) { login_as(@user = FactoryBot.create(:user)) }
+
     it "should log the user out and go to the root URL" do
       delete :destroy
       expect(response).to redirect_to('/')

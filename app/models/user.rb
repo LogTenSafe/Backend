@@ -58,7 +58,7 @@ class User < ApplicationRecord
 
   def self.authenticate(login, password)
     user = User.find_by_login(login)
-    (user&.authentic?(password)) ? user : nil
+    user&.authentic?(password) ? user : nil
   end
 
   # @private

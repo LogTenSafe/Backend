@@ -12,14 +12,14 @@ gem 'responders'
 gem 'pg'
 
 # ASSETS
+gem 'bootstrap'
 gem 'coffee-rails'
 gem 'font-awesome-rails'
 gem 'jquery-rails'
 gem 'sass-rails'
 gem 'sprockets-rails'
-gem 'uglifier'
 gem 'tether-rails'
-gem 'bootstrap'
+gem 'uglifier'
 
 # VIEWS
 gem 'jbuilder'
@@ -68,7 +68,7 @@ group :test do
   # SPECS
   gem 'rails-controller-testing'
   gem 'rspec-its', require: 'rspec/its'
-  gem 'rspec-rails', github: 'rspec/rspec-rails', branch: '4-0-dev'
+  gem 'rspec-rails', '4.0.0.beta.3'
 
   # FACTORIES/DB
   gem 'database_cleaner'

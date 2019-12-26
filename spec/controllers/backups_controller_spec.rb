@@ -27,7 +27,7 @@ RSpec.describe BackupsController, type: :controller do
     it "should send a copy of the backup" do
       get :show, params: {id: @backup.to_param, format: 'sql'}
       skip "No way to test this without running a web server"
-      expect(response.status).to eql(200)
+      expect(response.status).to be(200)
     end
   end
 end
