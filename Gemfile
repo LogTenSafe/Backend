@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 # FRAMEWORK
 gem 'bootsnap'
 gem 'configoro'
-gem 'rails', '6.0.1'
+gem 'rails', '6.0.2.2'
 
 # CONTROLLERS
 gem 'responders'
