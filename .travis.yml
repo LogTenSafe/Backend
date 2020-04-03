@@ -4,20 +4,20 @@ rvm:
 services:
 - postgresql
 addons:
-  postgresql: '12.1'
+  postgresql: "12"
+  apt:
+    packages:
+    - postgresql-12
+    - postgresql-client-12
 before_install:
 - gem update --system
 - gem install bundler
-- sudo apt-get update
-- sudo apt-get --yes remove postgresql\*
-- sudo apt-get install -y postgresql-12 postgresql-client-12
-- sudo cp /etc/postgresql/{9.6,12}/main/pg_hba.conf
-- sudo service postgresql restart 12
 before_script:
 - createuser LogTenSafe
 - createdb -O LogTenSafe LogTenSafe_test
 env:
   global:
-    - secure: fwyJxzk0n9jj5Ohj292mUYqDScxFCZH1PuBWTMOjtuq3AJOp3xpyskRt0xvR1hWGxbMduPbHb03UE4USHPXYs7x82ILEKWHnZZvKNmuXDp3wYAXyUu/loJkU0a4Wq8VxB5wUWTAfxJoNBC/32/fJ1wMO0czwB3ptEbuP7GwlW0c=
-    - RAILS_TEST_DB_USER=postgres
-    - PGUSER=postgres
+  - secure: fwyJxzk0n9jj5Ohj292mUYqDScxFCZH1PuBWTMOjtuq3AJOp3xpyskRt0xvR1hWGxbMduPbHb03UE4USHPXYs7x82ILEKWHnZZvKNmuXDp3wYAXyUu/loJkU0a4Wq8VxB5wUWTAfxJoNBC/32/fJ1wMO0czwB3ptEbuP7GwlW0c=
+  - RAILS_TEST_DB_USERNAME=travis
+  - PGUSER=travis
+  - PGPORT=5433
