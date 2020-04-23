@@ -1,0 +1,22 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: logtensafe
+
+development:
+  <<: *default
+  database: logtensafe_development
+
+test: &test
+  <<: *default
+  database: logtensafe_test
+  owner: logtensafe
+  username: <%= ENV.fetch('RAILS_TEST_DB_USERNAME') { 'tmorgan' } %>
+  port: <%= ENV.fetch('PGPORT') { 5432 } %>
+
+cypress: *test
+
+production:
+  <<: *default
+  database: logtensafe_production

@@ -1,0 +1,22 @@
+---
+:concurrency: 5
+:pidfile: tmp/pids/sidekiq.pid
+production:
+  :concurrency: 20
+  :queues:
+  - logtensafe_production_default
+  - logtensafe_production_active_storage_analysis
+  - logtensafe_production_active_storage_purge
+  - logtensafe_production_mailers
+development:
+  :queues:
+  - logtensafe_development_default
+  - logtensafe_development_active_storage_analysis
+  - logtensafe_development_active_storage_purge
+  - logtensafe_development_mailers
+cypress:
+  :queues:
+  - logtensafe_cypress_default
+  - logtensafe_cypress_active_storage_analysis
+  - logtensafe_cypress_active_storage_purge
+  - logtensafe_cypress_mailers
