@@ -1,0 +1,31 @@
+language: ruby
+rvm:
+- 2.7.1
+services:
+- postgresql
+addons:
+  postgresql: "12"
+  apt:
+    packages:
+    - postgresql-12
+    - postgresql-client-12
+before_install:
+# RUBYGEMS
+- gem update --system
+- gem install bundler
+- bundle install
+before_script:
+# POSTGRESQL
+- createuser LogTenSafe
+- createdb -O LogTenSafe LogTenSafe_test
+# SEED
+- bundle exec rails db:migrate
+env:
+  global:
+  - secure: fwyJxzk0n9jj5Ohj292mUYqDScxFCZH1PuBWTMOjtuq3AJOp3xpyskRt0xvR1hWGxbMduPbHb03UE4USHPXYs7x82ILEKWHnZZvKNmuXDp3wYAXyUu/loJkU0a4Wq8VxB5wUWTAfxJoNBC/32/fJ1wMO0czwB3ptEbuP7GwlW0c=
+  - RAILS_TEST_DB_USERNAME=travis
+  - PGUSER=travis
+  - PGPORT=5433
+  - PATH="$HOME/bin:$PATH"
+script:
+- rspec spec

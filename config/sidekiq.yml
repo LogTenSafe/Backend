@@ -1,0 +1,9 @@
+---
+:concurrency: 5
+:pidfile: tmp/pids/sidekiq.pid
+production:
+  :concurrency: 20
+:queues:
+- LogTenSafe_development_default
+- LogTenSafe_development_active_storage_analysis
+- LogTenSafe_development_active_storage_purge
