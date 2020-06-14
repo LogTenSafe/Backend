@@ -1,8 +1,5 @@
 require File.expand_path('./environment', __dir__)
 
-# config valid for current version and patch releases of Capistrano
-lock '~> 3'
-
 set :application, 'logtensafe'
 set :repo_url, 'https://github.com/LogTenSafe/Backend.git'
 
@@ -23,12 +20,6 @@ append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets',
 set :rvm_ruby_version, "2.7.1@#{fetch :application}"
 
 set :sidekiq_config, 'config/sidekiq.yml'
-
-# set :nvm_type, :system
-# set :nvm_node, 'v9.5.0'
-# append :nvm_map_bins, 'yarnpkg', './bin/yarn', 'webpack'
-set :default_env,
-    'PATH' => '/usr/local/nvm/versions/node/v12.18.0/bin:$PATH'
 
 set :bugsnag_api_key, Rails.application.credentials.bugsnag_api_key
 
