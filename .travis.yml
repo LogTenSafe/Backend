@@ -1,6 +1,6 @@
 language: ruby
 rvm:
-- 2.7.2
+- 3.0
 services:
 - postgresql
 addons:
@@ -28,4 +28,4 @@ env:
   - PGPORT=5433
   - PATH="$HOME/bin:$PATH"
 script:
-- rspec spec
+- bundle exec rspec spec

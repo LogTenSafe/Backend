@@ -46,11 +46,11 @@ class LogbookAnalyzer < ActiveStorage::Analyzer
 
   def last_flight
     @last_flight ||= begin
-                       columns, last_flight = db.execute2('SELECT * FROM ZFLIGHT ORDER BY ZFLIGHT_FLIGHTDATE DESC LIMIT 1').first(2)
-                       return nil if last_flight.nil?
+      columns, last_flight = db.execute2('SELECT * FROM ZFLIGHT ORDER BY ZFLIGHT_FLIGHTDATE DESC LIMIT 1').first(2)
+      return nil if last_flight.nil?
 
-                       Hash[*columns.zip(last_flight).flatten]
-                     end
+      Hash[*columns.zip(last_flight).flatten]
+    end
   end
 
   def flight_date(flight)

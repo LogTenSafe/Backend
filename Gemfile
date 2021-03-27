@@ -1,11 +1,11 @@
 source 'https://rubygems.org'
 
-ruby '2.7.2'
+ruby '3.0'
 
 # FRAMEWORK
 gem 'bootsnap'
 gem 'rack-cors'
-gem 'rails', '6.0.3.1'
+gem 'rails'
 gem 'redis'
 
 # MODELS

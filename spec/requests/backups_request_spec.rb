@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "Backups", type: :request do
   include Devise::Test::IntegrationHelpers
+  include ActionDispatch::TestProcess::FixtureFile
 
   describe "GET /index" do
     let(:user) { FactoryBot.create :user }
