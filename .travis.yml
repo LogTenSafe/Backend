@@ -1,31 +1,31 @@
 language: ruby
 rvm:
-- 3.0
+  - 3.0.1
 services:
-- postgresql
+  - postgresql
 addons:
   postgresql: "12"
   apt:
     packages:
-    - postgresql-12
-    - postgresql-client-12
+      - postgresql-12
+      - postgresql-client-12
 before_install:
-# RUBYGEMS
-- gem update --system
-- gem install bundler
-- bundle install
+  # RUBYGEMS
+  - gem update --system
+  - gem install bundler
+  - bundle install
 before_script:
-# POSTGRESQL
-- createuser logtensafe
-- createdb -O logtensafe logtensafe_test
-# SEED
-- bundle exec rails db:migrate
+  # POSTGRESQL
+  - createuser logtensafe
+  - createdb -O logtensafe logtensafe_test
+  # SEED
+  - bundle exec rails db:migrate
 env:
   global:
-  - secure: "FMvD7R4M4ZhzLaXVHxcJZfzumF3WmJOQotaX583QY5G2/srduiiCIU/+Jvwf9yoNj1RL4DYoJSx3t+D2CWdU2yfO8QCdLnNWmZj+9cfKw5ZDulD68RKemH0MU87XnxSlpbIVT50Aidpo19npwrwZQAJBTkuGAo/ktHsTWrgl+hmCClqLca2EaBDpIBe6mksoipORb4cRtjHvO04e5xHDzCqS0xMGeCkUcZh+PIlpfIQN7+86ywqs+4/07A+dMymGxyuiisaldCxBVB7qFEMLOeMwWF1ZQFTBpmrx7yuHNFKux8KD0Q/XlyjgnqfGAiZZq3XX1TnklMDqTxomVQ0w014L9Bdgl4Q5QrbqUfmkBCoPsLwssBR9TT30eC/ifeWkkJeht/ubepQju5c2fdFIvT+milq+Ql+TRjBzcOdoUylKCn5xdBbpEVaX4VHKVRgYiHC4geZI+CIXDIg5as0EAgICi/k0iQxS0fwlUxzSyW7pH3C2Ygr/2tMOoh7SeRkclcsn0LWx7Q7KbBWXqZVVa6+35mYwYO8aCqGwPPNuTzDDyFZzpJELf2PnyEMs4E4yzhPPoF6Lf9YurDPUMbUpSUh3mrZ3FVyDyAMZXqfTdwGIz2x/SLm3aM7zU9mf+OdOP+nHevRWJVDwoPLZK9CPIVUIwBiLTrqB6fIUg/yqkrg="
-  - RAILS_TEST_DB_USERNAME=travis
-  - PGUSER=travis
-  - PGPORT=5433
-  - PATH="$HOME/bin:$PATH"
+    - secure: "FMvD7R4M4ZhzLaXVHxcJZfzumF3WmJOQotaX583QY5G2/srduiiCIU/+Jvwf9yoNj1RL4DYoJSx3t+D2CWdU2yfO8QCdLnNWmZj+9cfKw5ZDulD68RKemH0MU87XnxSlpbIVT50Aidpo19npwrwZQAJBTkuGAo/ktHsTWrgl+hmCClqLca2EaBDpIBe6mksoipORb4cRtjHvO04e5xHDzCqS0xMGeCkUcZh+PIlpfIQN7+86ywqs+4/07A+dMymGxyuiisaldCxBVB7qFEMLOeMwWF1ZQFTBpmrx7yuHNFKux8KD0Q/XlyjgnqfGAiZZq3XX1TnklMDqTxomVQ0w014L9Bdgl4Q5QrbqUfmkBCoPsLwssBR9TT30eC/ifeWkkJeht/ubepQju5c2fdFIvT+milq+Ql+TRjBzcOdoUylKCn5xdBbpEVaX4VHKVRgYiHC4geZI+CIXDIg5as0EAgICi/k0iQxS0fwlUxzSyW7pH3C2Ygr/2tMOoh7SeRkclcsn0LWx7Q7KbBWXqZVVa6+35mYwYO8aCqGwPPNuTzDDyFZzpJELf2PnyEMs4E4yzhPPoF6Lf9YurDPUMbUpSUh3mrZ3FVyDyAMZXqfTdwGIz2x/SLm3aM7zU9mf+OdOP+nHevRWJVDwoPLZK9CPIVUIwBiLTrqB6fIUg/yqkrg="
+    - RAILS_TEST_DB_USERNAME=travis
+    - PGUSER=travis
+    - PGPORT=5433
+    - PATH="$HOME/bin:$PATH"
 script:
-- bundle exec rspec spec
+  - bundle exec rspec spec
