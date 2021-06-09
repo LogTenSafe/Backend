@@ -41,7 +41,7 @@ Rails.application.routes.draw do
   direct :edit_user_password do |args|
     URI.join(
         Rails.application.config.urls.frontend,
-        '/#/reset_password/' + args[:reset_password_token]
+        "/#/reset_password/#{args[:reset_password_token]}"
     ).to_s
   end
 end

@@ -95,7 +95,7 @@ class BackupsController < ApplicationController
     checksum = ActiveStorage::Blob.new.send(:compute_checksum_in_chunks, logbook.to_io)
     backup = current_user.backups.
         joins(logbook_attachment: :blob).
-        where(ActiveStorage::Blob.arel_attribute(:checksum).eq(checksum)).
+        where(ActiveStorage::Blob.arel_table[:checksum].eq(checksum)).
         first or return false
 
     respond_with(@backup = backup)
