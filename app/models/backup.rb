@@ -45,7 +45,7 @@ class Backup < ApplicationRecord
 
   %i[total_hours last_flight].each do |property|
     define_method(property) do
-      return nil unless logbook&.attachment&.metadata.present?
+      return nil if logbook&.attachment&.metadata.blank?
 
       return logbook.metadata[property.to_s]
     end
