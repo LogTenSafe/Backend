@@ -12,7 +12,7 @@ class LogbookAnalyzer < ActiveStorage::Analyzer
   # @private
   def metadata
     {
-        total_hours: total_hours,
+        total_hours:,
         last_flight: ({
             date:        flight_date(last_flight),
             origin:      flight_origin(last_flight),

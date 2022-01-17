@@ -1,3 +1,5 @@
+require 'jwt_blacklist'
+
 # A user of this website. Users are identified by their email address. User
 # authentication is handled by Devise, mediated by JSON web tokens.
 #

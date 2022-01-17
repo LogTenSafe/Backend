@@ -30,9 +30,9 @@ Rails.application.routes.draw do
     put 'password' => 'registrations#update'
     get 'registration/cancel' => 'registrations#cancel'
 
-    post 'forgot_password' => 'devise/passwords#create'
-    patch 'forgot_password' => 'devise/passwords#update'
-    put 'forgot_password' => 'devise/passwords#update'
+    post 'forgot_password' => 'passwords#create'
+    patch 'forgot_password' => 'passwords#update'
+    put 'forgot_password' => 'passwords#update'
   end
 
   root to: redirect(Rails.application.config.urls.frontend)
