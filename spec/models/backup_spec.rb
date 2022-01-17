@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.describe Backup, type: :model do
   describe '#most_recent?' do
     before :each do
-      @user    = FactoryBot.create(:user)
-      @backups = FactoryBot.create_list(:backup, 3, user: @user)
+      @user    = create(:user)
+      @backups = create_list(:backup, 3, user: @user)
       @backups.each_with_index { |b, i| b.update created_at: i.minutes.ago }
     end
 
@@ -28,9 +28,9 @@ RSpec.describe Backup, type: :model do
       }
   }.each do |property, expected_value|
     describe property do
-      let(:backup_with_logbook) { FactoryBot.create :backup }
-      let(:backup_without_logbook) { FactoryBot.build :backup, logbook: nil }
-      let(:backup_without_analyzed_logbook) { FactoryBot.build :backup, skip_analyze: true }
+      let(:backup_with_logbook) { create :backup }
+      let(:backup_without_logbook) { build :backup, logbook: nil }
+      let(:backup_without_analyzed_logbook) { build :backup, skip_analyze: true }
 
       it "passes the call through to the attached metadata" do
         expect(backup_with_logbook.send(property)).to eq(expected_value)
@@ -47,7 +47,7 @@ RSpec.describe Backup, type: :model do
   end
 
   it "broadcasts changes to the user's channel" do
-    backup = FactoryBot.create(:backup)
+    backup = create(:backup)
     expect { backup.update hostname: 'hello' }.
         to have_broadcasted_to(backup.user).from_channel(BackupsChannel)
   end
