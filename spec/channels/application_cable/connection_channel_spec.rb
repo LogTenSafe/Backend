@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe ApplicationCable::Connection, type: :channel do
-  let(:user) { FactoryBot.create :user }
+  let(:user) { create :user }
   let(:jwt) { Warden::JWTAuth::UserEncoder.new.call(user, :user, nil).first }
 
   it "subscribes for a valid JWT" do
