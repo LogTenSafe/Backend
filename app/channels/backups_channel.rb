@@ -16,7 +16,7 @@ class BackupsChannel < ApplicationCable::Channel
 
     # @private
     def encode(backup)
-      ApplicationController.render(partial: 'backups/backup', locals: {backup: backup, include_pagination: true})
+      ApplicationController.render(partial: 'backups/backup', locals: {backup:, include_pagination: true})
     end
   end
 end

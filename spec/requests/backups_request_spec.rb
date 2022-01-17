@@ -5,16 +5,16 @@ RSpec.describe "Backups", type: :request do
   include ActionDispatch::TestProcess::FixtureFile
 
   describe "GET /index" do
-    let(:user) { FactoryBot.create :user }
+    let(:user) { create :user }
 
     before :each do
-      @backups = FactoryBot.create_list(:backup, 12, user: user)
+      @backups = create_list(:backup, 12, user:)
       @backups.each_with_index { |b, i| b.update created_at: i.minutes.ago }
 
       # red herring - belongs to someone else
-      FactoryBot.create :backup
+      create :backup
       # red herring - not analyzed
-      FactoryBot.create :backup, user: user, skip_analyze: true
+      create :backup, user:, skip_analyze: true
 
       stub_const 'ApplicationController::DEFAULT_PER_PAGE', 10
     end
@@ -69,7 +69,7 @@ RSpec.describe "Backups", type: :request do
   end
 
   describe "GET /show" do
-    let(:backup) { FactoryBot.create :backup }
+    let(:backup) { create :backup }
     let(:user) { backup.user }
 
     it "requires a log in" do
@@ -102,14 +102,14 @@ RSpec.describe "Backups", type: :request do
       end
 
       it "does not allow access to someone else's backup" do
-        get "/backups/#{FactoryBot.create(:backup).to_param}.json"
+        get "/backups/#{create(:backup).to_param}.json"
         expect(response.status).to eq(404)
       end
     end
   end
 
   describe "POST /create" do
-    let(:user) { FactoryBot.create :user }
+    let(:user) { create :user }
     let :backup_params do
       file = fixture_file_upload(Rails.root.join('spec', 'fixtures', 'LogTenCoreDataStore.sql').to_s,
                                  'application/sql',
@@ -148,7 +148,7 @@ RSpec.describe "Backups", type: :request do
   end
 
   describe "DELETE /destroy" do
-    let(:backup) { FactoryBot.create :backup }
+    let(:backup) { create :backup }
     let(:user) { backup.user }
 
     it "requires a log in" do
@@ -182,7 +182,7 @@ RSpec.describe "Backups", type: :request do
       end
 
       it "doesn't delete a backup belonging to a different user" do
-        backup = FactoryBot.create(:backup)
+        backup = create(:backup)
 
         delete "/backups/#{backup.to_param}.json"
 
