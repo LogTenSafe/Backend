@@ -64,8 +64,8 @@ module LogTenSafe
 
     config.after_initialize do
       require 'active_storage_websockets'
-      ActiveStorage::Blob.include AddActionCableTo::Blob
-      ActiveStorage::Attachment.include AddActionCableTo::Attachment
+      ActiveSupport.on_load(:active_storage_blob) { include AddActionCableTo::Blob }
+      ActiveSupport.on_load(:active_storage_attachment) { include AddActionCableTo::Attachment }
     end
   end
 end

@@ -21,7 +21,7 @@ RSpec.describe "Backups", type: :request do
 
     it "requires a log in" do
       get '/backups.json'
-      expect(response.status).to eq(401)
+      expect(response).to have_http_status(:unauthorized)
     end
 
     context "[logged in]" do
@@ -29,7 +29,7 @@ RSpec.describe "Backups", type: :request do
 
       it "returns the user's most recent backups" do
         get '/backups.json'
-        expect(response.status).to eq(200)
+        expect(response).to have_http_status(:ok)
         expect(response.body).to match_json_expression(@backups.first(10).map do |backup|
           {
               id:           backup.id,
@@ -48,7 +48,7 @@ RSpec.describe "Backups", type: :request do
 
       it "returns the next page when given a 'page' parameter" do
         get "/backups.json?page=2"
-        expect(response.status).to eq(200)
+        expect(response).to have_http_status(:ok)
         expect(response.body).to match_json_expression(@backups[10, 10].map do |backup|
           {
               id:           backup.id,
@@ -74,7 +74,7 @@ RSpec.describe "Backups", type: :request do
 
     it "requires a log in" do
       get "/backups/#{backup.to_param}.json"
-      expect(response.status).to eq(401)
+      expect(response).to have_http_status(:unauthorized)
     end
 
     context "[logged in]" do
@@ -82,7 +82,7 @@ RSpec.describe "Backups", type: :request do
 
       it "returns JSON information about a backup" do
         get "/backups/#{backup.to_param}.json"
-        expect(response.status).to eq(200)
+        expect(response).to have_http_status(:ok)
         expect(response.body).
             to match_json_expression(
                    id:           backup.id,
@@ -98,12 +98,12 @@ RSpec.describe "Backups", type: :request do
 
       it "handles an unknown backup" do
         get '/backups/hi.json'
-        expect(response.status).to eq(404)
+        expect(response).to have_http_status(:not_found)
       end
 
       it "does not allow access to someone else's backup" do
         get "/backups/#{create(:backup).to_param}.json"
-        expect(response.status).to eq(404)
+        expect(response).to have_http_status(:not_found)
       end
     end
   end
@@ -122,7 +122,7 @@ RSpec.describe "Backups", type: :request do
 
     it "requires a log in" do
       post "/backups.json", params: {backup: backup_params}
-      expect(response.status).to eq(401)
+      expect(response).to have_http_status(:unauthorized)
     end
 
     context "[logged in]" do
@@ -131,7 +131,7 @@ RSpec.describe "Backups", type: :request do
       it "adds a new backup" do
         post "/backups.json", params: {backup: backup_params}
 
-        expect(response.status).to eq(200)
+        expect(response).to have_http_status(:ok)
         backup = Backup.find(response.parsed_body['id'])
         expect(backup.hostname).to eq('host')
         expect(backup.user_id).to eq(user.id)
@@ -139,7 +139,7 @@ RSpec.describe "Backups", type: :request do
 
       it "handles errors" do
         post "/backups.json", params: {backup: backup_params.merge(logbook: nil)}
-        expect(response.status).to eq(422)
+        expect(response).to have_http_status(:unprocessable_entity)
         expect(response.body).to match_json_expression(
                                      errors: {logbook: ["can’t be blank"]}
                                  )
@@ -153,7 +153,7 @@ RSpec.describe "Backups", type: :request do
 
     it "requires a log in" do
       delete "/backups/#{backup.to_param}.json"
-      expect(response.status).to eq(401)
+      expect(response).to have_http_status(:unauthorized)
       expect { backup.reload }.not_to raise_error
     end
 
@@ -162,7 +162,7 @@ RSpec.describe "Backups", type: :request do
 
       it "deletes a backup" do
         delete "/backups/#{backup.to_param}.json"
-        expect(response.status).to eq(200)
+        expect(response).to have_http_status(:ok)
         expect(response.body).to match_json_expression(
                                      id:           backup.id,
                                      hostname:     backup.hostname,
@@ -178,7 +178,7 @@ RSpec.describe "Backups", type: :request do
 
       it "handles an unknown backup" do
         delete '/backups/oops.json'
-        expect(response.status).to eq(404)
+        expect(response).to have_http_status(:not_found)
       end
 
       it "doesn't delete a backup belonging to a different user" do
@@ -186,7 +186,7 @@ RSpec.describe "Backups", type: :request do
 
         delete "/backups/#{backup.to_param}.json"
 
-        expect(response.status).to eq(404)
+        expect(response).to have_http_status(:not_found)
         expect { backup.reload }.not_to raise_error
       end
     end
