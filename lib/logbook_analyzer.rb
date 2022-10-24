@@ -1,12 +1,14 @@
+# frozen_string_literal: true
+
 # Loads LogTen Pro logbooks using SQLite, and performs queries to produce
 # metadata about the logbook, which is saved to the Blob's `metadata` field.
 
 class LogbookAnalyzer < ActiveStorage::Analyzer
   # @private
   def self.accept?(blob)
-    blob.content_type == 'application/x-sqlite3' ||
-        blob.content_type == 'application/vnd.sqlite3' ||
-        blob.content_type == 'application/sql'
+    blob.content_type == "application/x-sqlite3" ||
+        blob.content_type == "application/vnd.sqlite3" ||
+        blob.content_type == "application/sql"
   end
 
   # @private
@@ -40,13 +42,13 @@ class LogbookAnalyzer < ActiveStorage::Analyzer
     # in time calculations. to solve this, we instead take the numbers into
     # ruby-land, and sum them there, where the result is equal to the one logten
     # gives.
-    times = db.execute('SELECT ZFLIGHT_TOTALTIME FROM ZFLIGHT').flatten
+    times = db.execute("SELECT ZFLIGHT_TOTALTIME FROM ZFLIGHT").flatten
     times.compact.sum { |t| (t / 60.0).round(1) }
   end
 
   def last_flight
     @last_flight ||= begin
-      columns, last_flight = db.execute2('SELECT * FROM ZFLIGHT ORDER BY ZFLIGHT_FLIGHTDATE DESC LIMIT 1').first(2)
+      columns, last_flight = db.execute2("SELECT * FROM ZFLIGHT ORDER BY ZFLIGHT_FLIGHTDATE DESC LIMIT 1").first(2)
       last_flight.nil? ? nil : Hash[*columns.zip(last_flight).flatten]
     end
   end
@@ -54,18 +56,18 @@ class LogbookAnalyzer < ActiveStorage::Analyzer
   def flight_date(flight)
     return nil unless flight
 
-    Time.utc(2001).advance(seconds: flight['ZFLIGHT_FLIGHTDATE']).utc.to_date
+    Time.utc(2001).advance(seconds: flight["ZFLIGHT_FLIGHTDATE"]).utc.to_date
   end
 
   def flight_origin(flight)
-    db.get_first_value('SELECT ZPLACE_FAAID FROM ZPLACE WHERE Z_PK = ?', flight['ZFLIGHT_FROMPLACE'])
+    db.get_first_value("SELECT ZPLACE_FAAID FROM ZPLACE WHERE Z_PK = ?", flight["ZFLIGHT_FROMPLACE"])
   end
 
   def flight_destination(flight)
-    db.get_first_value('SELECT ZPLACE_FAAID FROM ZPLACE WHERE Z_PK = ?', flight['ZFLIGHT_TOPLACE'])
+    db.get_first_value("SELECT ZPLACE_FAAID FROM ZPLACE WHERE Z_PK = ?", flight["ZFLIGHT_TOPLACE"])
   end
 
   def flight_duration(flight)
-    (flight['ZFLIGHT_TOTALTIME'] / 60.0).round(1)
+    (flight["ZFLIGHT_TOTALTIME"] / 60.0).round(1)
   end
 end

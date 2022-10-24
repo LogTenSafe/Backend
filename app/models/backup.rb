@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # An uploaded and backed-up LogTen Pro logbook. Logbooks are SQLite files,
 # stored using Active Storage. {LogbookAnalyzer} parses the logbook and
 # populates the blob's metadata with information about the logbook.
@@ -35,7 +37,7 @@ class Backup < ApplicationRecord
     joins(logbook_attachment: :blob).
         where(%(metadata::text LIKE '%\\\\"analyzed\\\\":true%'))
   end
-  #TODO do better than this :/
+  #TODO: do better than this :/
 
   # @return [true, false] If this is the most recent backup for this user.
 

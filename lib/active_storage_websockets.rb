@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # @private
 #
 # Allows changes to a blob's metadata to result in Action Cable broadcasts for

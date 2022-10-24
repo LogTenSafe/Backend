@@ -1,38 +1,40 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
-  match '*path', via: :options, to: ->(_) { [204, {'Content-Type' => 'text/plain'}] }
+  match "*path", via: :options, to: ->(_) { [204, {"Content-Type" => "text/plain"}] }
 
   if Rails.env.cypress?
-    require 'reset_cypress'
-    require 'cypress_emails'
-    get '/cypress/reset' => ResetCypress.new
-    get '/cypress/emails' => CypressEmails.new
+    require "reset_cypress"
+    require "cypress_emails"
+    get "/cypress/reset" => ResetCypress.new
+    get "/cypress/emails" => CypressEmails.new
   end
 
   if Rails.env.production?
-    mount ActionCable.server => '/cable'
+    mount ActionCable.server => "/cable"
   end
 
   if Rails.env.development?
-    require 'sidekiq/web'
-    mount Sidekiq::Web => 'sidekiq'
+    require "sidekiq/web"
+    mount Sidekiq::Web => "sidekiq"
   end
 
   resources :backups, only: %i[index show create destroy]
 
   devise_for :users
   devise_scope :user do
-    post 'login' => 'sessions#create'
-    delete 'logout' => 'sessions#destroy'
-    post 'signup' => 'registrations#create'
-    delete 'user' => 'registrations#destroy'
+    post "login" => "sessions#create"
+    delete "logout" => "sessions#destroy"
+    post "signup" => "registrations#create"
+    delete "user" => "registrations#destroy"
 
-    patch 'password' => 'registrations#update'
-    put 'password' => 'registrations#update'
-    get 'registration/cancel' => 'registrations#cancel'
+    patch "password" => "registrations#update"
+    put "password" => "registrations#update"
+    get "registration/cancel" => "registrations#cancel"
 
-    post 'forgot_password' => 'passwords#create'
-    patch 'forgot_password' => 'passwords#update'
-    put 'forgot_password' => 'passwords#update'
+    post "forgot_password" => "passwords#create"
+    patch "forgot_password" => "passwords#update"
+    put "forgot_password" => "passwords#update"
   end
 
   root to: redirect(Rails.application.config.urls.frontend)
@@ -42,6 +44,6 @@ Rails.application.routes.draw do
     URI.join(
         Rails.application.config.urls.frontend,
         "/#/reset_password/#{args[:reset_password_token]}"
-    ).to_s
+      ).to_s
   end
 end

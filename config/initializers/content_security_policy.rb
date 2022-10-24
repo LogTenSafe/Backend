@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Be sure to restart your server when you modify this file.
 
 # Define an application-wide content security policy
@@ -14,18 +16,17 @@
 # Vue.js in development requires:
 # - connect-src 'ws://localhost:3035' 'http://localhost:3035'
 
-extra_image_sources   = %w[
+extra_image_sources = %w[
     https://avfacts.s3.us-west-1.amazonaws.com
 ]
-extra_script_sources  = [
-]
+extra_script_sources = []
 extra_connect_sources = %w[
-  https://sessions.bugsnag.com
+    https://sessions.bugsnag.com
 ]
 
 if Rails.env.development? || Rails.env.cypress?
   extra_script_sources << :unsafe_eval << :unsafe_inline
-  extra_connect_sources << 'ws://localhost:3035' << 'http://localhost:3035'
+  extra_connect_sources << "ws://localhost:3035" << "http://localhost:3035"
 end
 
 Rails.application.configure do
@@ -46,7 +47,7 @@ Rails.application.configure do
 
   # Generate session nonces for permitted importmap and inline scripts
   config.content_security_policy_nonce_generator  = ->(request) { request.session.id.to_s }
-  config.content_security_policy_nonce_directives = %w(script-src)
+  config.content_security_policy_nonce_directives = %w[script-src]
 
   # Report CSP violations to a specified URI. See:
   # https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy-Report-Only

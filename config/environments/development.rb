@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
@@ -19,10 +21,10 @@ Rails.application.configure do
 
   # Enable/disable caching. By default caching is disabled.
   # Run rails dev:cache to toggle caching.
-  if Rails.root.join("tmp/caching-dev.txt").exist?
+  if Rails.root.join("tmp", "caching-dev.txt").exist?
     config.cache_store = :memory_store
     config.public_file_server.headers = {
-      "Cache-Control" => "public, max-age=#{2.days.to_i}"
+        "Cache-Control" => "public, max-age=#{2.days.to_i}"
     }
   else
     config.action_controller.perform_caching = false
@@ -53,7 +55,6 @@ Rails.application.configure do
   # Highlight code that triggered database queries in logs.
   config.active_record.verbose_query_logs = true
 
-
   # Raises error for missing translations.
   # config.i18n.raise_on_missing_translations = true
 
@@ -67,8 +68,8 @@ Rails.application.configure do
   config.action_cable.mount_path = nil
 
   # Use a different cache store in production.
-  config.cache_store = :redis_cache_store, {url: 'redis://localhost:6379/0/logtensafe_development_cache'}
+  config.cache_store = :redis_cache_store, {url: "redis://localhost:6379/0/logtensafe_development_cache"}
 
   config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = { :address => "localhost", :port => 1025 }
+  config.action_mailer.smtp_settings = {address: "localhost", port: 1025}
 end

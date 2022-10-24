@@ -1,82 +1,84 @@
-source 'https://rubygems.org'
+# frozen_string_literal: true
 
-ruby '3.1.2'
+source "https://rubygems.org"
+
+ruby "3.1.2"
 
 # FRAMEWORK
-gem 'rack-cors'
-gem 'rails'
-gem 'redis'
+gem "rack-cors"
+gem "rails"
+gem "redis"
 
 # MODELS
-gem 'active_storage_validations'
-gem 'pg'
+gem "active_storage_validations"
+gem "pg"
 
 # CONTROLLERS
-gem 'responders'
+gem "responders"
 
 # AUTH
-gem 'devise'
-gem 'devise-jwt'
+gem "devise"
+gem "devise-jwt"
 
 # VIEWS
-gem 'jbuilder'
+gem "jbuilder"
 
 # ERRORS
-gem 'bugsnag'
+gem "bugsnag"
 
 # IMPORTING
-gem 'sqlite3'
+gem "sqlite3"
 
 # CRON
-gem 'whenever'
+gem "whenever"
 
 # JOBS
-gem 'sidekiq'
+gem "sidekiq"
 
 group :development do
-  gem 'listen'
-  gem 'puma'
+  gem "listen"
+  gem "puma"
 
   # DEVELOPMENT
-  gem 'better_errors'
-  gem 'binding_of_caller'
+  gem "better_errors"
+  gem "binding_of_caller"
 
   # DEPLOYMENT
-  gem 'bcrypt_pbkdf', require: false
-  gem 'bugsnag-capistrano', require: false
-  gem 'capistrano', require: false
-  gem 'capistrano-bundler', require: false
-  gem 'capistrano-nvm', require: false
-  gem 'capistrano-rails', require: false
-  gem 'capistrano-rvm', require: false
-  gem 'ed25519', require: false
+  gem "bcrypt_pbkdf", require: false
+  gem "bugsnag-capistrano", require: false
+  gem "capistrano", require: false
+  gem "capistrano-bundler", require: false
+  gem "capistrano-nvm", require: false
+  gem "capistrano-rails", require: false
+  gem "capistrano-rvm", require: false
+  gem "ed25519", require: false
 end
 
 group :test do
   # SPECS
-  gem 'rails-controller-testing'
-  gem 'rspec-rails'
+  gem "rails-controller-testing"
+  gem "rspec-rails"
 
   # ISOLATION
-  gem 'database_cleaner'
-  gem 'fakefs', require: 'fakefs/safe'
-  gem 'timecop'
-  gem 'webmock'
+  gem "database_cleaner"
+  gem "fakefs", require: "fakefs/safe"
+  gem "timecop"
+  gem "webmock"
 
   # FACTORIES
-  gem 'factory_bot_rails'
-  gem 'ffaker'
+  gem "factory_bot_rails"
+  gem "ffaker"
 
   # ASSERTIONS
-  gem 'json_expressions', require: 'json_expressions/rspec'
+  gem "json_expressions", require: "json_expressions/rspec"
 end
 
 group :production do
   # ACTIVE STORAGE
-  gem 'aws-sdk-s3', require: false
+  gem "aws-sdk-s3", require: false
 end
 
 group :doc do
-  gem 'redcarpet', require: nil
-  gem 'yard', require: nil
+  gem "redcarpet", require: nil
+  gem "yard", require: nil
 end

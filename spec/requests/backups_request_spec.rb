@@ -1,6 +1,8 @@
-require 'rails_helper'
+# frozen_string_literal: true
 
-RSpec.describe "Backups", type: :request do
+require "rails_helper"
+
+RSpec.describe "Backups" do
   include Devise::Test::IntegrationHelpers
   include ActionDispatch::TestProcess::FixtureFile
 
@@ -16,11 +18,11 @@ RSpec.describe "Backups", type: :request do
       # red herring - not analyzed
       create :backup, user:, skip_analyze: true
 
-      stub_const 'ApplicationController::DEFAULT_PER_PAGE', 10
+      stub_const "ApplicationController::DEFAULT_PER_PAGE", 10
     end
 
     it "requires a log in" do
-      get '/backups.json'
+      get "/backups.json"
       expect(response).to have_http_status(:unauthorized)
     end
 
@@ -28,7 +30,7 @@ RSpec.describe "Backups", type: :request do
       before(:each) { sign_in user }
 
       it "returns the user's most recent backups" do
-        get '/backups.json'
+        get "/backups.json"
         expect(response).to have_http_status(:ok)
         expect(response.body).to match_json_expression(@backups.first(10).map do |backup|
           {
@@ -42,8 +44,8 @@ RSpec.describe "Backups", type: :request do
               destroyed:    false
           }
         end)
-        expect(response.headers['X-Page']).to eq('1')
-        expect(response.headers['X-Count']).to eq('12')
+        expect(response.headers["X-Page"]).to eq("1")
+        expect(response.headers["X-Count"]).to eq("12")
       end
 
       it "returns the next page when given a 'page' parameter" do
@@ -62,8 +64,8 @@ RSpec.describe "Backups", type: :request do
           }
         end)
 
-        expect(response.headers['X-Page']).to eq('2')
-        expect(response.headers['X-Count']).to eq('12')
+        expect(response.headers["X-Page"]).to eq("2")
+        expect(response.headers["X-Count"]).to eq("12")
       end
     end
   end
@@ -93,11 +95,11 @@ RSpec.describe "Backups", type: :request do
                    logbook:      {size: Integer, analyzed: true},
                    download_url: String,
                    destroyed:    false
-               )
+                 )
       end
 
       it "handles an unknown backup" do
-        get '/backups/hi.json'
+        get "/backups/hi.json"
         expect(response).to have_http_status(:not_found)
       end
 
@@ -111,11 +113,11 @@ RSpec.describe "Backups", type: :request do
   describe "POST /create" do
     let(:user) { create :user }
     let :backup_params do
-      file = fixture_file_upload(Rails.root.join('spec', 'fixtures', 'LogTenCoreDataStore.sql').to_s,
-                                 'application/sql',
+      file = fixture_file_upload(Rails.root.join("spec", "fixtures", "LogTenCoreDataStore.sql").to_s,
+                                 "application/sql",
                                  :binary)
       {
-          hostname: 'host',
+          hostname: "host",
           logbook:  file
       }
     end
@@ -132,8 +134,8 @@ RSpec.describe "Backups", type: :request do
         post "/backups.json", params: {backup: backup_params}
 
         expect(response).to have_http_status(:ok)
-        backup = Backup.find(response.parsed_body['id'])
-        expect(backup.hostname).to eq('host')
+        backup = Backup.find(response.parsed_body["id"])
+        expect(backup.hostname).to eq("host")
         expect(backup.user_id).to eq(user.id)
       end
 
@@ -142,7 +144,7 @@ RSpec.describe "Backups", type: :request do
         expect(response).to have_http_status(:unprocessable_entity)
         expect(response.body).to match_json_expression(
                                      errors: {logbook: ["can’t be blank"]}
-                                 )
+                                   )
       end
     end
   end
@@ -172,12 +174,12 @@ RSpec.describe "Backups", type: :request do
                                      logbook:      {size: Integer, analyzed: true},
                                      download_url: String,
                                      destroyed:    true
-                                 )
+                                   )
         expect { backup.reload }.to raise_error(ActiveRecord::RecordNotFound)
       end
 
       it "handles an unknown backup" do
-        delete '/backups/oops.json'
+        delete "/backups/oops.json"
         expect(response).to have_http_status(:not_found)
       end
 

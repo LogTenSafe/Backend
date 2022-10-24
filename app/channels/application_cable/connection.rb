@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Container module for Action Cable classes.
 
 module ApplicationCable
@@ -26,7 +28,7 @@ module ApplicationCable
     private
 
     def find_verified_user
-      User.find_by!(email: jwt['e'])
+      User.find_by!(email: jwt["e"])
     end
 
     def token_decoder

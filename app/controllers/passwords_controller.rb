@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # @private
 class PasswordsController < Devise::PasswordsController
   def sign_in(resource_or_scope, *args)

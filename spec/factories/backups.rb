@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :backup do
     transient do
       logbook do
         {
-            io:       File.new(Rails.root.join('spec', 'fixtures', 'LogTenCoreDataStore.sql').to_s),
-            filename: 'LogTenCoreDataStore.sql'
+            io:       File.new(Rails.root.join("spec", "fixtures", "LogTenCoreDataStore.sql").to_s),
+            filename: "LogTenCoreDataStore.sql"
         }
       end
       skip_analyze { false }

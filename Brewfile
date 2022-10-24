@@ -1,3 +1,5 @@
-brew 'postgresql'
-brew 'redis'
-brew 'sqlite'
+# frozen_string_literal: true
+
+brew "postgresql"
+brew "redis"
+brew "sqlite"

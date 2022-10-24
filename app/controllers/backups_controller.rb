@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # RESTful API controller for a {User}'s {Backup} records.
 
 class BackupsController < ApplicationController

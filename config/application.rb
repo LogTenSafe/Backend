@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative "boot"
 
 require "rails"
@@ -40,14 +42,14 @@ module LogTenSafe
     config.generators do |g|
       g.test_framework :rspec, fixture: true, views: false
       g.integration_tool :rspec
-      g.fixture_replacement :factory_bot, dir: 'spec/factories'
+      g.fixture_replacement :factory_bot, dir: "spec/factories"
     end
 
     # Use a real queuing backend for Active Job (and separate queues per environment).
     config.active_job.queue_adapter     = :sidekiq
     config.active_job.queue_name_prefix = "logtensafe_#{Rails.env}"
 
-    require 'logbook_analyzer'
+    require "logbook_analyzer"
     config.active_storage.analyzers.append LogbookAnalyzer
 
     config.urls = config_for(:urls)
@@ -63,7 +65,7 @@ module LogTenSafe
     }
 
     config.after_initialize do
-      require 'active_storage_websockets'
+      require "active_storage_websockets"
       ActiveSupport.on_load(:active_storage_blob) { include AddActionCableTo::Blob }
       ActiveSupport.on_load(:active_storage_attachment) { include AddActionCableTo::Attachment }
     end

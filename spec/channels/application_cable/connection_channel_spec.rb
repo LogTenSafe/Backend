@@ -1,6 +1,8 @@
-require 'rails_helper'
+# frozen_string_literal: true
 
-RSpec.describe ApplicationCable::Connection, type: :channel do
+require "rails_helper"
+
+RSpec.describe ApplicationCable::Connection do
   let(:user) { create :user }
   let(:jwt) { Warden::JWTAuth::UserEncoder.new.call(user, :user, nil).first }
 

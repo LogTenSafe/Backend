@@ -1,5 +1,7 @@
-require 'rails_helper'
+# frozen_string_literal: true
 
-RSpec.describe JWTBlacklist, type: :model do
+require "rails_helper"
+
+RSpec.describe JWTBlacklist do
   # no specs
 end

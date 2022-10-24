@@ -1,7 +1,9 @@
-require 'rails_helper'
+# frozen_string_literal: true
 
-RSpec.describe Backup, type: :model do
-  describe '#most_recent?' do
+require "rails_helper"
+
+RSpec.describe Backup do
+  describe "#most_recent?" do
     before :each do
       @user    = create(:user)
       @backups = create_list(:backup, 3, user: @user)
@@ -21,10 +23,10 @@ RSpec.describe Backup, type: :model do
   {
       total_hours: 818.3,
       last_flight: {
-          'date'        => '2020-05-29',
-          'destination' => 'SQL',
-          'duration'    => 2.4,
-          'origin'      => 'SQL'
+          "date"        => "2020-05-29",
+          "destination" => "SQL",
+          "duration"    => 2.4,
+          "origin"      => "SQL"
       }
   }.each do |property, expected_value|
     describe property do
@@ -48,7 +50,7 @@ RSpec.describe Backup, type: :model do
 
   it "broadcasts changes to the user's channel" do
     backup = create(:backup)
-    expect { backup.update hostname: 'hello' }.
+    expect { backup.update hostname: "hello" }.
         to have_broadcasted_to(backup.user).from_channel(BackupsChannel)
   end
 end

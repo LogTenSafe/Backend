@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 json.call backup, :id, :created_at, :hostname, :last_flight, :total_hours
 
 json.logbook do
