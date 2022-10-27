@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
-brew "postgresql"
-brew "redis"
+brew "postgresql@13"
+brew "redis@6.2"
 brew "sqlite"
