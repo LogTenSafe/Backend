@@ -162,7 +162,7 @@ GEM
     fakefs (1.9.0)
     ffaker (2.21.0)
     ffi (1.15.5)
-    globalid (1.0.0)
+    globalid (1.0.1)
       activesupport (>= 5.0)
     hashdiff (1.0.1)
     i18n (1.12.0)
@@ -187,7 +187,7 @@ GEM
     marcel (1.0.2)
     method_source (1.0.0)
     mini_mime (1.1.2)
-    minitest (5.16.3)
+    minitest (5.17.0)
     net-imap (0.3.1)
       net-protocol
     net-pop (0.1.2)
