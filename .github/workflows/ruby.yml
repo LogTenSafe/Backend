@@ -45,7 +45,7 @@ jobs:
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: "3.1"
+          ruby-version: "3.2"
           bundler-cache: true
       - name: Create test database
         env:
@@ -72,11 +72,11 @@ jobs:
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: "3.1"
+          ruby-version: "3.2"
           bundler-cache: true
       - name: Run Rubocop
         run: |
-          gem install rubocop-rails rubocop-rspec rubocop-performance
+          gem install rubocop-rails rubocop-rspec rubocop-performance rubocop-md rubocop-rake
           git clone https://gist.github.com/65e21b9e8b0d1db285dcb4fc627b98fa.git .rubocop
           cp .rubocop/.rubocop.yml .rubocop-ruby.yml
           git clone https://gist.github.com/14cfa24d53c12bf385871e9b93b95c37.git .rubocop-rspec
@@ -84,7 +84,7 @@ jobs:
           git clone https://gist.github.com/9f3bb94ef794f92dd480cffa019e91a4.git .rubocop-rails
           cp .rubocop-rails/.rubocop-rails.yml .
           cat .rubocop.yml | sed -e 's/~\/.rubocop/.rubocop/' | sed -e 's/.rubocop.yml/.rubocop-ruby.yml/' > .rubocop2.yml
-          mv .rubocop2.yml .rubocop.yml                                         
+          mv .rubocop2.yml .rubocop.yml
           rubocop --parallel
       - name: Run Brakeman
         run: |
