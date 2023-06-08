@@ -12,7 +12,7 @@ FactoryBot.define do
       skip_analyze { false }
     end
 
-    association :user
+    user
 
     hostname { FFaker::Internet.domain_word }
 
