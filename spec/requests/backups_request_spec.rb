@@ -32,18 +32,7 @@ RSpec.describe "Backups" do
       it "returns the user's most recent backups" do
         get "/backups.json"
         expect(response).to have_http_status(:ok)
-        expect(response.body).to match_json_expression(@backups.first(10).map do |backup|
-          {
-              id:           backup.id,
-              hostname:     backup.hostname,
-              last_flight:  backup.last_flight,
-              total_hours:  backup.total_hours,
-              created_at:   String,
-              logbook:      {size: Integer, analyzed: true},
-              download_url: String,
-              destroyed:    false
-          }
-        end)
+        expect(response.body).to match_schema("backups")
         expect(response.headers["X-Page"]).to eq("1")
         expect(response.headers["X-Count"]).to eq("12")
       end
@@ -51,19 +40,7 @@ RSpec.describe "Backups" do
       it "returns the next page when given a 'page' parameter" do
         get "/backups.json?page=2"
         expect(response).to have_http_status(:ok)
-        expect(response.body).to match_json_expression(@backups[10, 10].map do |backup|
-          {
-              id:           backup.id,
-              hostname:     backup.hostname,
-              last_flight:  backup.last_flight,
-              total_hours:  backup.total_hours,
-              created_at:   String,
-              logbook:      {size: Integer, analyzed: true},
-              download_url: String,
-              destroyed:    false
-          }
-        end)
-
+        expect(response.body).to match_schema("backups")
         expect(response.headers["X-Page"]).to eq("2")
         expect(response.headers["X-Count"]).to eq("12")
       end
@@ -85,17 +62,7 @@ RSpec.describe "Backups" do
       it "returns JSON information about a backup" do
         get "/backups/#{backup.to_param}.json"
         expect(response).to have_http_status(:ok)
-        expect(response.body).
-            to match_json_expression(
-                   id:           backup.id,
-                   hostname:     backup.hostname,
-                   last_flight:  backup.last_flight,
-                   total_hours:  backup.total_hours,
-                   created_at:   String,
-                   logbook:      {size: Integer, analyzed: true},
-                   download_url: String,
-                   destroyed:    false
-                 )
+        expect(response.body).to match_schema("backup")
       end
 
       it "handles an unknown backup" do
@@ -142,9 +109,7 @@ RSpec.describe "Backups" do
       it "handles errors" do
         post "/backups.json", params: {backup: backup_params.merge(logbook: nil)}
         expect(response).to have_http_status(:unprocessable_entity)
-        expect(response.body).to match_json_expression(
-                                     errors: {logbook: ["can’t be blank"]}
-                                   )
+        expect(response.parsed_body).to eq("errors" => {"logbook" => ["can’t be blank"]})
       end
     end
   end
@@ -165,16 +130,7 @@ RSpec.describe "Backups" do
       it "deletes a backup" do
         delete "/backups/#{backup.to_param}.json"
         expect(response).to have_http_status(:ok)
-        expect(response.body).to match_json_expression(
-                                     id:           backup.id,
-                                     hostname:     backup.hostname,
-                                     last_flight:  backup.last_flight,
-                                     total_hours:  backup.total_hours,
-                                     created_at:   String,
-                                     logbook:      {size: Integer, analyzed: true},
-                                     download_url: String,
-                                     destroyed:    true
-                                   )
+        expect(response.body).to match_schema("backup")
         expect { backup.reload }.to raise_error(ActiveRecord::RecordNotFound)
       end
 

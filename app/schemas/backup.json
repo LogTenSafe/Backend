@@ -1,0 +1,71 @@
+{
+  "$schema":     "http://json-schema.org/draft-06/schema#",
+  "$id":         "https://logtensafe.com/backup.schema.json",
+  "title":       "Backup",
+  "description": "A backup of a logbook file.",
+  "type":        "object",
+  "properties":  {
+    "id":           {
+      "type":        "number",
+      "description": "Unique identifier for the Backup.",
+      "readOnly":    true
+    },
+    "created_at":   {
+      "type":        "string",
+      "description": "The moment the Backup was created.",
+      "format":      "date-time"
+    },
+    "hostname":     {
+      "type":        "string",
+      "description": "The hostname of the computer that uploaded the Backup.",
+      "format":      "hostname"
+    },
+    "last_flight":  {
+      "$ref": "flight.json"
+    },
+    "total_hours":  {
+      "type":        "number",
+      "description": "The total number of flight hours across all flights in the Backup.",
+      "minimum":     0
+    },
+    "logbook":      {
+      "type":       "object",
+      "properties": {
+        "size":     {
+          "type":        "integer",
+          "description": "The size of the logbook file, in bytes.",
+          "minimum":     0
+        },
+        "analyzed": {
+          "type":        "boolean",
+          "description": "Whether the logbook has been analyzed by the Active Storage analyzer."
+        }
+      },
+      "required":   [
+        "size",
+        "analyzed"
+      ]
+    },
+    "download_url": {
+      "type":        "string",
+      "description": "The URL where the logbook file can be downloaded.",
+      "format":      "url"
+    },
+    "destroyed":    {
+      "type":        "boolean",
+      "description": "True if the Backup was just deleted."
+    },
+    "total":        {
+      "type":        "integer",
+      "description": "The total number of analyzed Backups for this User.",
+      "minimum":     0
+    }
+  },
+  "required":    [
+    "id",
+    "created_at",
+    "logbook",
+    "download_url",
+    "destroyed"
+  ]
+}

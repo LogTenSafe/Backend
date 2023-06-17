@@ -1,0 +1,9 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "$id":     "https://logtensafe.com/backup.schema.json",
+  "title":   "Backups",
+  "type":    "array",
+  "items":   {
+    "$ref": "backup.json"
+  }
+}

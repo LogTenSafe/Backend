@@ -69,7 +69,7 @@ group :test do
   gem "ffaker"
 
   # ASSERTIONS
-  gem "json_expressions", require: "json_expressions/rspec"
+  gem "json_schemer"
 end
 
 group :production do

@@ -1,0 +1,27 @@
+{
+  "$schema":     "http://json-schema.org/draft-06/schema#",
+  "$id":         "https://logtensafe.com/flight.schema.json",
+  "title":       "Flight",
+  "description": "A logged flight within a Backup.",
+  "type":        "object",
+  "properties":  {
+    "date":        {
+      "type":        "string",
+      "description": "The date of the flight (in UTC).",
+      "format":      "date"
+    },
+    "origin":      {
+      "type":        "string",
+      "description": "The identifier for the origin airport."
+    },
+    "destination": {
+      "type":        "string",
+      "description": "The identifier for the destination airport."
+    },
+    "duration":    {
+      "type":        "number",
+      "description": "The duration of the flight (in hours)."
+    }
+  },
+  "required": ["date", "duration"]
+}

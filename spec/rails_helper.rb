@@ -94,3 +94,23 @@ RSpec.configure do |config|
     FileUtils.rm_r Rails.root.join("tmp", "storage"), force: true
   end
 end
+
+RSpec::Matchers.define :match_schema do |schema|
+  match do |actual|
+    schema  = Rails.root.join("app", "schemas", "#{schema}.json")
+    schemer = JSONSchemer.schema(schema, ref_resolver: ->(uri) { Rails.root.join("app", "schemas", uri.path[1..]) })
+    json = JSON.parse(actual)
+
+    @errors = schemer.validate(json)
+    expect(@errors).not_to be_any
+  rescue JSON::ParserError
+    raise "expected #{actual.inspect} to be valid JSON"
+  end
+
+  failure_message do |actual|
+    <<~STR
+      expected #{actual.inspect} to match schema #{schema.basename}:
+      #{@errors.map { |err| err.slice("schema_pointer", "data_pointer", "type").inspect }.join("\n")}
+    STR
+  end
+end
