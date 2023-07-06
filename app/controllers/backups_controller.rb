@@ -41,9 +41,7 @@ class BackupsController < ApplicationController
   # |:-----|:----------------------|
   # | `id` | The ID of a {Backup}. |
 
-  def show
-    respond_with @backup
-  end
+  def show = respond_with @backup
 
   # Creates a Backup from the given parameters.
   #
@@ -87,9 +85,7 @@ class BackupsController < ApplicationController
     @backup = current_user.backups.find(params[:id])
   end
 
-  def backup_params
-    params.require(:backup).permit(:logbook, :hostname)
-  end
+  def backup_params = params.require(:backup).permit(:logbook, :hostname)
 
   def validate_logbook_duplicate
     logbook = backup_params[:logbook] or return false

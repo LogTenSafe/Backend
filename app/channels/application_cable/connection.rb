@@ -27,9 +27,7 @@ module ApplicationCable
 
     private
 
-    def find_verified_user
-      User.find_by!(email: jwt["e"])
-    end
+    def find_verified_user = User.find_by!(email: jwt["e"])
 
     def token_decoder
       @token_decoder ||= Warden::JWTAuth::TokenDecoder.new

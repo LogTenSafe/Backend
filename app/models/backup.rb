@@ -41,9 +41,7 @@ class Backup < ApplicationRecord
 
   # @return [true, false] If this is the most recent backup for this user.
 
-  def most_recent?
-    user.backups.order(created_at: :desc).first.id == id
-  end
+  def most_recent? = user.backups.order(created_at: :desc).first.id == id
 
   %i[total_hours last_flight].each do |property|
     define_method(property) do

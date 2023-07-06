@@ -43,7 +43,7 @@ class LogbookAnalyzer < ActiveStorage::Analyzer
     # ruby-land, and sum them there, where the result is equal to the one logten
     # gives.
     times = db.execute("SELECT ZFLIGHT_TOTALTIME FROM ZFLIGHT").flatten
-    times.compact.sum { |t| (t / 60.0).round(1) }
+    times.compact.sum { (_1 / 60.0).round(1) }
   end
 
   def last_flight

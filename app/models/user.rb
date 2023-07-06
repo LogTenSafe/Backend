@@ -29,12 +29,10 @@ class User < ApplicationRecord
   has_many :backups, dependent: :destroy
 
   # @private
-  def send_devise_notification(notification, *args)
-    devise_mailer.send(notification, self, *args).deliver_later
+  def send_devise_notification(notification, *)
+    devise_mailer.send(notification, self, *).deliver_later
   end
 
   # @private
-  def jwt_payload
-    {e: email}
-  end
+  def jwt_payload = {e: email}
 end

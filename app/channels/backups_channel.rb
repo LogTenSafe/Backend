@@ -7,9 +7,7 @@
 class BackupsChannel < ApplicationCable::Channel
 
   # @private
-  def subscribed
-    stream_for current_user, coder: nil
-  end
+  def subscribed = stream_for current_user, coder: nil
 
   # Encodes a {Backup} for transmission.
 
