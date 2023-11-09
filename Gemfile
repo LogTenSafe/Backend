@@ -61,7 +61,6 @@ group :test do
   # ISOLATION
   gem "database_cleaner"
   gem "fakefs", require: "fakefs/safe"
-  gem "timecop"
   gem "webmock"
 
   # FACTORIES
